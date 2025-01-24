@@ -34,7 +34,7 @@
                                 BorderBrush="#9AA6B2" 
                                 BorderThickness="1">
                             <Grid>
-                                <Image Source="./images/add.png" Width="30"/>
+                                <Image Source="/images/add.png" Width="30"/>
                             </Grid>
                         </Border>
                     </ControlTemplate>
@@ -61,7 +61,7 @@
                                 BorderBrush="#9AA6B2" 
                                 BorderThickness="1">
                             <Grid>
-                                <Image Source="./images/image.png" Width="30"/>
+                                <Image Source="/images/image.png" Width="30"/>
                             </Grid>
                         </Border>
                     </ControlTemplate>
@@ -122,7 +122,7 @@
                                 BorderBrush="{TemplateBinding BorderBrush}" 
                                 BorderThickness="{TemplateBinding BorderThickness}">
                             <Grid>
-                                <Image Source="./images/play.png" 
+                                <Image Source="/images/play.png" 
                                        Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Grid>
                         </Border>
@@ -197,7 +197,7 @@
              BorderBrush="#9AA6B2" 
              BorderThickness="1">
                             <Grid>
-                                <Image Source="images/disquete_white.png" Width="30"/>
+                                <Image Source="/images/disquete_white.png" Width="30"/>
                             </Grid>
                         </Border>
                     </ControlTemplate>
@@ -312,7 +312,7 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Margin="5">
                                         <!-- Image -->
-                                        <Image Source="images/manzana.jpg" Width="30" Height="30" Margin="0,0,10,0"/>
+                                        <Image Source="/images/manzana.jpg" Width="30" Height="30" Margin="0,0,10,0"/>
                                         <!-- Text -->
                                         <TextBlock Text="HOLAAA" VerticalAlignment="Center" FontSize="14" Margin="20 0 20 0"/>
                                         <TextBox Name="cantidad" Width="100"/>
