@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using ProyectoConjunto.viewModels;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,11 +17,15 @@ namespace ProyectoConjunto
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private RecetaViewModel recetaViewModel;
+
         public MainWindow()
         {
             InitializeComponent();
 
-
+            recetaViewModel = new RecetaViewModel();
+            this.DataContext = recetaViewModel;
 
             // Crear datos directamente como una lista de diccionarios
             var recetas = new List<Dictionary<string, object>>

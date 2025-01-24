@@ -104,7 +104,7 @@
         </Style>
 
 
-     
+
 
         <Style x:Key="IconoBoton" TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
@@ -222,19 +222,20 @@
         <TabItem Header="Recetas" Background="#9AA6B2">
             <Grid Background="#F8FAFC">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="16*"/>
+                    <ColumnDefinition Width="50*"/>
                     <ColumnDefinition Width="15*"/>
-                    <ColumnDefinition Width="60*"/>
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="714*"/>
+                    <ColumnDefinition Width="771*"/>
                 </Grid.ColumnDefinitions>
                 <!-- Encabezado de la ventana -->
-                <Border Background="#BCCCDC" Height="50" VerticalAlignment="Top" Grid.ColumnSpan="5">
+                <Border Background="#BCCCDC" Height="50" VerticalAlignment="Top" Grid.ColumnSpan="6">
                     <TextBlock Text="Recetas Favoritas" FontSize="20" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Border>
 
                 <!-- DataGrid para mostrar recetas -->
-                <DataGrid Name="DataGridRecetas" AutoGenerateColumns="False" Margin="4,70,0,0" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="790" Height="200" Grid.ColumnSpan="4" Grid.Column="1">
+                <DataGrid Name="DataGridRecetas" AutoGenerateColumns="False" Margin="4,70,0,0" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="790" Height="200" Grid.ColumnSpan="5" Grid.Column="1">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*" />
                         <DataGridTemplateColumn Header="Creador" Width="*"/>
@@ -251,10 +252,10 @@
                 <!-- Botón para agregar nueva receta -->
                 <Button Name="AñadirReceta" Content="+" Style="{StaticResource BotonRedondoBrush}" 
                 Width="50" Height="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
-                Margin="0,0,29,49" FontSize="18" ToolTip="Agregar nueva receta" Grid.Column="4" Click="AñadirReceta_Click" RenderTransformOrigin="-0.4,-0.2" />
+                Margin="0,0,29,49" FontSize="18" ToolTip="Agregar nueva receta" Grid.Column="5" Click="AñadirReceta_Click" RenderTransformOrigin="-0.4,-0.2" />
 
                 <!-- Panel de receta con información adicional -->
-                <Border BorderBrush="#BCCCDC" BorderThickness="1" CornerRadius="10" Padding="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,294,0,0" Height="147" Width="325" Background="#BCCCDC" Grid.ColumnSpan="4" Grid.Column="1">
+                <Border BorderBrush="#BCCCDC" BorderThickness="1" CornerRadius="10" Padding="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,294,0,0" Height="147" Width="325" Background="#BCCCDC" Grid.ColumnSpan="5" Grid.Column="1">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Height="136" Width="255" Margin="0,-11,0,0">
 
                         <!-- Imagen de la receta -->
@@ -277,10 +278,10 @@
                 </Border>
 
                 <!-- ListBox para mostrar una lista de elementos adicionales -->
-                <Border BorderBrush="#BCCCDC" BorderThickness="1" CornerRadius="10" Padding="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,294,0,0" Height="147" Width="325" Background="#BCCCDC" Grid.Column="4">
+                <Border BorderBrush="#BCCCDC" BorderThickness="1" CornerRadius="10" Padding="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,294,0,0" Height="147" Width="325" Background="#BCCCDC" Grid.Column="5">
                     <ListBox Name="ListaIngredientesPrincipal" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="22,3,22,2" ToolTip="Ingredientes de la receta"/>
                 </Border>
-                <TextBlock Style="{StaticResource IconoIngredientes}" HorizontalAlignment="Left" Margin="438,298,0,0" TextWrapping="Wrap" Text="Ingredientes:" VerticalAlignment="Top" Grid.Column="4"/>
+                <TextBlock Style="{StaticResource IconoIngredientes}" HorizontalAlignment="Left" Margin="438,298,0,0" TextWrapping="Wrap" Text="Ingredientes:" VerticalAlignment="Top" Grid.Column="5"/>
             </Grid>
         </TabItem>
         <TabItem Header="Añadir">
@@ -346,7 +347,7 @@
 
 
         </TabItem>
-        
+
 
     </TabControl>
 </Window>

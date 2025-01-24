@@ -22,17 +22,8 @@ namespace ProyectoConjunto.viewModels
         private ObservableCollection<Pasos> listPasos;
         private ObservableCollection<Valoraciones> listValoraciones;
 
-        public RecetaViewModel(int id, string nombre, string dificultad, int duracion, string descripcion, int idUsuario, ObservableCollection<Ingredientes> listIngredientes, ObservableCollection<Pasos> listPasos, ObservableCollection<Valoraciones> listValoraciones)
+        public RecetaViewModel()
         {
-            this.id = id;
-            this.nombre = nombre;
-            this.dificultad = dificultad;
-            this.duracion = duracion;
-            this.descripcion = descripcion;
-            this.idUsuario = idUsuario;
-            this.listIngredientes = listIngredientes;
-            this.listPasos = listPasos;
-            this.listValoraciones = listValoraciones;
         }
 
         public int Id
