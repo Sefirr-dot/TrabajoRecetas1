@@ -1,148 +1,127 @@
-﻿using ProyectoConjunto.models;
+﻿using Microsoft.Win32;
+using ProyectoConjunto.models;
+using ProyectoConjunto.Models;
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace ProyectoConjunto.viewModels
 {
     public class RecetaViewModel : INotifyPropertyChanged
     {
-
-        private int id;
-        private string nombre;
-        private string dificultad;
-        private int duracion;
-        private string descripcion;
-        private int idUsuario;
-        private ObservableCollection<Ingredientes> listIngredientes;
-        private ObservableCollection<Pasos> listPasos;
-        private ObservableCollection<Valoraciones> listValoraciones;
+        private Receta recetaAGuardar;
+        private Pasos pasosALista;
+        private ObservableCollection<Pasos> listaPasos;
 
         public RecetaViewModel()
         {
-        }
+            recetaAGuardar = new Receta();
+            pasosALista = new Pasos();
+            listaPasos = new ObservableCollection<Pasos>();
+    }
 
-        public int Id
+        public Receta RecetaAGuardar
         {
-            get
-            {
-                return id;
-            }
+            get => recetaAGuardar;
             set
             {
-                id = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Id"));
-            }
-        }
-
-        public string Nombre
-        {
-            get
-            {
-                return nombre;
-            }
-            set
-            {
-                nombre = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Nombre"));
+                recetaAGuardar = value;
+                OnPropertyChanged(nameof(RecetaAGuardar));
             }
         }
 
-        public string Dificultad
+        public Pasos PasosALista
         {
-            get
-            {
-                return dificultad;
-            }
+            get => pasosALista;
             set
             {
-                dificultad = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Dificultad"));
+                pasosALista = value;
+                OnPropertyChanged(nameof(PasosALista));
             }
         }
 
-        public int Duracion
+        public ObservableCollection<Pasos> ListaPasos
         {
-            get
-            {
-                return duracion;
-            }
+            get => listaPasos;
             set
             {
-                duracion = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Duracion"));
-            }
-        }
-
-        public string Descripcion
-        {
-            get
-            {
-                return descripcion;
-            }
-            set
-            {
-                nombre = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Nombre"));
-            }
-        }
-
-        public int IdUsuario
-        {
-            get
-            {
-                return idUsuario;
-            }
-            set
-            {
-                idUsuario = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("IdUsuario"));
-            }
-        }
-
-        public ObservableCollection<Ingredientes> ListIngredientes
-        {
-            get
-            {
-                return listIngredientes;
-            }
-            set
-            {
-                ListIngredientes = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("listIngredientes"));
-            }
-        }
-
-        public ObservableCollection<Pasos> ListPasos
-        {
-            get
-            {
-                return listPasos;
-            }
-            set
-            {
-                ListPasos = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("listPasos"));
-            }
-        }
-
-        public ObservableCollection<Valoraciones> ListValoraciones
-        {
-            get
-            {
-                return listValoraciones;
-            }
-            set
-            {
-                ListValoraciones = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("listValoraciones"));
+                listaPasos = value;
+                OnPropertyChanged(nameof(ListaPasos));
             }
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        // Método para seleccionar imagen desde el explorador de archivos
+        public void SeleccionarImagen()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Title = "Seleccionar Imagen",
+                Filter = "Archivos de imagen (*.jpg;*.png;*.jpeg)|*.jpg;*.png;*.jpeg",
+                Multiselect = false
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                RecetaAGuardar.Imagen = openFileDialog.FileName;
+                OnPropertyChanged(nameof(RecetaAGuardar));
+                OnPropertyChanged(nameof(RecetaAGuardar.Imagen));
+            }
+        }
+
+        // Método para mostrar la imagen en un MessageBox (opcional)
+        public void pillarDatos()
+        {
+            if (!string.IsNullOrEmpty(RecetaAGuardar.Imagen) && File.Exists(RecetaAGuardar.Imagen))
+            {
+                try
+                {
+                    // Leer el archivo como un array de bytes
+                    byte[] imageBytes = File.ReadAllBytes(RecetaAGuardar.Imagen);
+
+                    // Convertir a Base64
+                    string base64String = Convert.ToBase64String(imageBytes);
+
+                    // Mostrar en un MessageBox (solo para pruebas)
+                    MessageBox.Show($"Imagen en Base64:\n{base64String.Substring(0, 100)}...");
+
+                    // Guardar el Base64 en el objeto RecetaAGuardar
+                    RecetaAGuardar.Imagen = base64String;
+
+                    // Notificar cambios a la UI
+                    OnPropertyChanged(nameof(RecetaAGuardar.Imagen));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al convertir la imagen: {ex.Message}");
+                }
+            }
+            else
+            {
+                MessageBox.Show("No contiene datos o la ruta de la imagen no es válida.");
+            }
+        }
+
+        public void AgregarPaso()
+        {
+            if (PasosALista != null && !string.IsNullOrWhiteSpace(PasosALista.Descripcion))
+            {
+                
+                ListaPasos.Add(PasosALista);
+
+                PasosALista = new Pasos();
+                OnPropertyChanged(nameof(PasosALista));
+                OnPropertyChanged(nameof(ListaPasos)); 
+            }
+        }
+
     }
 }

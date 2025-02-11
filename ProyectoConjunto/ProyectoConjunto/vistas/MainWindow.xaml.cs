@@ -40,10 +40,6 @@ namespace ProyectoConjunto
             // Asignar directamente la lista al DataGrid
             DataGridRecetas.ItemsSource = recetas;
 
-
-         
-
-
         }
 
         
@@ -67,6 +63,27 @@ namespace ProyectoConjunto
             }
 
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            recetaViewModel.pillarDatos();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is RecetaViewModel viewModel)
+            {
+                viewModel.SeleccionarImagen();
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is RecetaViewModel viewModel)
+            {
+                viewModel.AgregarPaso();
+            }
         }
     }
 }

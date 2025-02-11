@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProyectoConjunto"
         mc:Ignorable="d"
-        Title="MainWindow" Height="504" Width="863">
+        Title="MainWindow" Height="700" Width="863">
     <Window.Resources>
 
 
@@ -74,8 +74,6 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-
-
 
         <Style x:Key="titular" TargetType="TextBlock">
             <Setter Property="FontSize" Value="30"/>
@@ -211,10 +209,32 @@
             </Style.Triggers>
         </Style>
 
+        <Style x:Key="PasoTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border BorderBrush="Gray" BorderThickness="1" Padding="5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <!-- Para NumPaso -->
+                                    <ColumnDefinition Width="Auto"/>
+                                    <!-- Separador -->
+                                    <ColumnDefinition Width="*"/>
+                                    <!-- Para Descripción -->
+                                </Grid.ColumnDefinitions>
 
+                                <TextBlock Text="{Binding NumPaso}" Grid.Column="0" FontWeight="Bold" Margin="5"/>
 
-
-
+                                <TextBlock Text=" - " Grid.Column="1" Margin="5"/>
+ 
+                                <TextBlock Text="{Binding Descripcion}" Grid.Column="2" Margin="5"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
     </Window.Resources>
 
@@ -293,21 +313,30 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="250"/>
-                    <RowDefinition Height="250"/>
+                    <RowDefinition Height="320"/>
                 </Grid.RowDefinitions>
                 <StackPanel Name="principal" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Margin="10" Orientation="Vertical">
                     <TextBlock Text="Crea tu propia receta: " FontWeight="Medium" Style="{StaticResource titular}" />
                     <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
                         <TextBlock Text="Nombre: " VerticalAlignment="Center"/>
-                        <TextBox Name="tvNombre" Margin="5" Width="100" Style="{StaticResource formTextBox}"/>
+                        <TextBox Name="tvNombre" Margin="5" Width="100" Style="{StaticResource formTextBox}" Text="{Binding RecetaAGuardar.Nombre}"/>
                         <TextBlock Text="Tiempo Prep.: " Margin="5" VerticalAlignment="Center"/>
-                        <TextBox Name="tvTiempo" Margin="5" Width="100" Style="{StaticResource formTextBox}"/>
+                        <TextBox Name="tvTiempo" Margin="5" Width="100" Style="{StaticResource formTextBox}" Text="{Binding RecetaAGuardar.Duracion}"/>
                         <TextBlock Text="Dificultad.: " Margin="5" VerticalAlignment="Center"/>
-                        <TextBox Name="tvDificultad" Margin="5" Width="100" Style="{StaticResource formTextBox}"/>
+                        <TextBox Name="tvDificultad" Margin="5" Width="100" Style="{StaticResource formTextBox}" Text="{Binding RecetaAGuardar.Dificultad}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Margin="0 5 0 0">
-                        <TextBlock Text="Selecciona tus ingresdientes: " VerticalAlignment="Center"/>
+                        <TextBlock Text="Descripción: " VerticalAlignment="Center"/>
+                        <TextBox 
+                            Text="{Binding RecetaAGuardar.Descripcion}"
+                            Name="txtDescripcion" 
+                            Margin="0 0 0 10" 
+                            Height="100" 
+                            AcceptsReturn="True" 
+                            TextWrapping="Wrap" 
+                            VerticalScrollBarVisibility="Auto"/>
+                        <TextBlock Text="Selecciona tus ingredientes: " VerticalAlignment="Center"/>
                         <ListBox Name="ListaIngredientes" Height="100" ItemsSource="{Binding StringList}" SelectionMode="Multiple">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -326,21 +355,46 @@
                     <StackPanel Orientation="Vertical" Margin="0 10 0 0">
                         <TextBlock Text="Selecciona tus pasos: " VerticalAlignment="Center"/>
 
-                        <ListBox Name="tvPasos" Height="100"></ListBox>
+                        <ListBox Name="tvPasos" Height="100" ItemsSource="{Binding ListaPasos}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"/>
+                                            <!-- Para el número de paso -->
+                                            <ColumnDefinition Width="*"/>
+                                            <!-- Para la descripción -->
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="{Binding NumPaso}" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding Descripcion}" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0 10 0 0" HorizontalAlignment="Center">
-                        <Button Style="{StaticResource BotonRedondoGuardar}" Margin="0 15 0 0" Width="50" Height="50" ToolTip="Guardar Receta"/>
+                        <Button Style="{StaticResource BotonRedondoGuardar}" Margin="0 15 0 0" Width="50" Height="50" ToolTip="Guardar Receta" Click="Button_Click"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Name="recetas" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Margin="10" Orientation="Vertical">
                     <TextBlock Text="Imagen: " FontWeight="Medium" Style="{StaticResource titular}" />
-                    <Image Name="imagen" Width="100" Height="100" Margin="0 12 0 0"/>
-                    <Button Style="{StaticResource BotonRedondoImage}" Width="50" Height="50" Content="Seleccionar Imagen" Margin="0 15 0 0"/>
+                    <Image Name="imagen" Width="100" Height="100" Margin="0 12 0 0" Source="{Binding RecetaAGuardar.Imagen}"/>
+                    <Button Style="{StaticResource BotonRedondoImage}" Width="50" Height="50" Content="Seleccionar Imagen" Margin="0 15 0 0" Click="Button_Click_2"/>
                     <TextBlock Text="Pasos: " FontWeight="Medium" Style="{StaticResource titular}" Margin="0 25 0 0 " />
-                    <StackPanel Orientation="Vertical" Margin="0 15 0 0" HorizontalAlignment="Left">
-                        <TextBlock Text="Paso: "/>
-                        <TextBox Name="tvPaso" Margin="0 5 0 0" Style="{StaticResource formTextBox}" Width="140"/>
-                        <Button Style="{StaticResource BotonRedondoBrush}" Margin="0 15 0 0" Width="50" Height="50" ToolTip="Añadir Ingrediente"/>
+                    <StackPanel Orientation="Vertical" Margin="0 10 0 0" HorizontalAlignment="Left">
+                        <TextBlock Text="Num. Paso: "/>
+                        <TextBox Name="tvPaso" Margin="0 5 0 0" Style="{StaticResource formTextBox}" Width="140" Text="{Binding PasosALista.NumPaso}"/>
+                        <TextBlock Text="Descripción: " Margin="0 5 0 0"/>
+                        <TextBox 
+                            Text="{Binding PasosALista.Descripcion}"
+                            Name="txtPasoDescripcion" 
+                            Margin="0 0 0 10" 
+                            Height="100" 
+                            AcceptsReturn="True" 
+                            TextWrapping="Wrap" 
+                            VerticalScrollBarVisibility="Auto"/>
+                        <Button Style="{StaticResource BotonRedondoBrush}" Margin="0 15 0 0" Width="50" Height="50" ToolTip="Añadir Ingrediente" Click="Button_Click_1"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>

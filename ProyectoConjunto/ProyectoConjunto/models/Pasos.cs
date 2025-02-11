@@ -1,18 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
-namespace ProyectoConjunto.models
+namespace ProyectoConjunto.Models
 {
-    public class Pasos
+    public class Pasos : INotifyPropertyChanged
     {
         private int id;
         private int numPaso;
         private string descripcion;
         private int idReceta;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        // 🔹 Constructor vacío
+        public Pasos() { }
+
+        // 🔹 Constructor con parámetros
         public Pasos(int id, int numPaso, string descripcion, int idReceta)
         {
             this.id = id;
@@ -21,9 +29,58 @@ namespace ProyectoConjunto.models
             this.idReceta = idReceta;
         }
 
-        public int Id { get => id; set => id = value; }
-        public int NumPaso { get => numPaso; set => numPaso = value; }
-        public string Descripcion { get => descripcion; set => descripcion = value; }
-        public int IdReceta { get => idReceta; set => idReceta = value; }
+        // 🔹 Propiedades con notificación de cambio
+        public int Id
+        {
+            get => id;
+            set
+            {
+                if (id != value)
+                {
+                    id = value;
+                    OnPropertyChanged(nameof(Id));
+                }
+            }
+        }
+
+        public int NumPaso
+        {
+            get => numPaso;
+            set
+            {
+                if (numPaso != value)
+                {
+                    numPaso = value;
+                    OnPropertyChanged(nameof(NumPaso));
+                }
+            }
+        }
+
+        public string Descripcion
+        {
+            get => descripcion;
+            set
+            {
+                if (descripcion != value)
+                {
+                    descripcion = value;
+                    OnPropertyChanged(nameof(Descripcion));
+                }
+            }
+        }
+
+        public int IdReceta
+        {
+            get => idReceta;
+            set
+            {
+                if (idReceta != value)
+                {
+                    idReceta = value;
+                    OnPropertyChanged(nameof(IdReceta));
+                }
+            }
+        }
     }
 }
+
