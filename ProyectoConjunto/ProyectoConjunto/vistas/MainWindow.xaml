@@ -255,8 +255,12 @@
                 </Border>
 
                 <!-- DataGrid para mostrar recetas -->
+<<<<<<< Updated upstream
                 <DataGrid Name="dataGridrece" ItemsSource="{Binding Recetas}" Grid.ColumnSpan="6" Margin="0,0,29,392" AutoGenerateColumns="False" SelectionChanged="dataGridrece_SelectionChanged">
                     <!-- Columna para mostrar el Nombre -->
+=======
+                <DataGrid Name="DataGridRecetas" AutoGenerateColumns="False" Margin="4,70,0,0" ItemsSource="{Binding recetaList}"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="790" Height="200" Grid.ColumnSpan="5" Grid.Column="1">
+>>>>>>> Stashed changes
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*"/>
 
@@ -305,6 +309,7 @@
                     <ListBox Name="ListaIngredientesPrincipal" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="22,3,22,2" ToolTip="Ingredientes de la receta"/>
                 </Border>
                 <TextBlock Style="{StaticResource IconoIngredientes}" HorizontalAlignment="Left" Margin="438,298,0,0" TextWrapping="Wrap" Text="Ingredientes:" VerticalAlignment="Top" Grid.Column="5"/>
+                <TextBlock Name="hola2" Grid.Column="5" HorizontalAlignment="Center" Margin="0,535,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
             </Grid>
         </TabItem>
         <TabItem Header="Añadir">

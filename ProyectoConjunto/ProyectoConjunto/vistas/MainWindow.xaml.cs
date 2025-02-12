@@ -1,5 +1,9 @@
 ﻿using ProyectoConjunto.models;
 using ProyectoConjunto.viewModels;
+<<<<<<< Updated upstream
+=======
+using System.Collections.ObjectModel;
+>>>>>>> Stashed changes
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,21 +22,35 @@ namespace ProyectoConjunto
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        private Repositorio repositorio;
         private RecetaViewModel recetaViewModel;
+        public ObservableCollection<Receta> recetaList { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
 
+<<<<<<< Updated upstream
             recetaViewModel = new RecetaViewModel();
             this.DataContext = new PrincipalViewModel();
 
 
+=======
+            
 
+            
+            recetaList = new ObservableCollection<Receta>();
+            Repositorio.CargarRecetasDesdeBaseDeDatos(recetaList);
+>>>>>>> Stashed changes
+
+            
+            this.DataContext = this; // Esto establece el DataContext a la instancia de MainWindow.
         }
 
+<<<<<<< Updated upstream
         
+=======
+>>>>>>> Stashed changes
 
         private void PlayReceta_Click(object sender, RoutedEventArgs e)
         {
