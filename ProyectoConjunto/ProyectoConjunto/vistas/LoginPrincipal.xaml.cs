@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoConjunto.vistas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,9 +27,9 @@ namespace ProyectoConjunto
 
         private void IniciarSesionClick(object sender, RoutedEventArgs e)
         {
-            // Abrir ventna pasos
-            MainWindow main = new MainWindow();
-            main.Show();
+            ListRecetas v = new ListRecetas();
+            v.Show();
+            this.Close();
         }
     }
 }

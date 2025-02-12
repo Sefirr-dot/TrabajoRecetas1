@@ -20,7 +20,7 @@ namespace ProyectoConjunto.viewModels
             recetaAGuardar = new Receta();
             pasosALista = new Pasos();
             listaPasos = new ObservableCollection<Pasos>();
-    }
+        }
 
         public Receta RecetaAGuardar
         {

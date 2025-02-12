@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProyectoConjunto"
         mc:Ignorable="d"
-        Title="LoginPrincipal" Height="450" Width="800">
+        Title="EcoFood" Height="450" Width="800">
     <Window.Resources>
         <!-- Animación para cambiar el fondo a rojo y luego hacerlo transparente -->
         <Storyboard x:Key="LabelBackgroundAnimation">
@@ -18,16 +18,16 @@
             </ColorAnimationUsingKeyFrames>
         </Storyboard>
 
-        <Style x:Key="BotonRedondo" TargetType="Button">
-            <Setter Property="Background" Value="#9AA6B2" />
-            <Setter Property="Foreground" Value="Black" />
+        <Style x:Key="BotonRedondoLogin" TargetType="Button">
+            <Setter Property="Background" Value="#8bc43f" />
+            <Setter Property="Foreground" Value="White" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="Padding" Value="10,5" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}" 
-                     CornerRadius="15" 
+                     CornerRadius="5" 
                      
                      BorderThickness="1">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -37,8 +37,31 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="LightSkyBlue"/>
-                    <Setter Property="Foreground" Value="#9AA6B2"/>
+                    <Setter Property="Background" Value="#1b763b"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="BotonRedondoRegister" TargetType="Button">
+            <Setter Property="Background" Value="#52443b" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+             CornerRadius="5" 
+             
+             BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#f6931e"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -63,7 +86,7 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Image Source="/vistas/fondo_cocina.jpg"
+        <Image Source="/images/background.jpg"
             Stretch="Fill"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch" 
@@ -72,19 +95,19 @@
         <!-- Contenedor central que ajusta el Canvas -->
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
             
-                <Border VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" BorderThickness="3" BorderBrush="Black" CornerRadius="50" Height="343" Width="241" Canvas.Left="255" Canvas.Top="44" Background="#D9EAFD">
+                <Border VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" BorderBrush="Black" CornerRadius="8" Height="343" Width="241" Canvas.Left="255" Canvas.Top="44" Background="White">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="263" Canvas.Top="50" Width="240" >
-                        <Image Height="120" Width="120" Source="/images/iconoAPP.png" Panel.ZIndex="1" Margin="10"/>
+                        <Image Height="120" Width="120" Source="/images/logo-ecofood.png" Panel.ZIndex="1" Margin="10"/>
                         <Label Content="Nombre de usuario:" Canvas.Left="340" Canvas.Top="181" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" FontFamily="Yu Gothic UI Semibold"  />
-                        <TextBox x:Name="txtBoxLogin" Style="{StaticResource textBox}" Canvas.Left="340" TextWrapping="Wrap" Canvas.Top="212" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Yu Gothic UI Light" Background="Transparent" BorderBrush="#FF96ADF6" Opacity="0.6"/>
+                    <TextBox x:Name="txtBoxLogin" Style="{StaticResource textBox}" Canvas.Left="340" TextWrapping="Wrap" Canvas.Top="212" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Yu Gothic UI Light" Background="Transparent" BorderBrush="#1b763b" Opacity="0.6"/>
                         <Label Content="Contraseña:" Canvas.Left="340" Canvas.Top="230" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" FontFamily="Yu Gothic UI Semibold"/>
-                        <TextBox x:Name="txtBoxPassword" Style="{StaticResource textBox}" Canvas.Left="340" TextWrapping="Wrap" Canvas.Top="261" Width="120" FontFamily="Yu Gothic UI Light" Opacity="0.6" Background="Transparent" BorderBrush="#FF96ADF6" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtBoxPassword" Style="{StaticResource textBox}" Canvas.Left="340" TextWrapping="Wrap" Canvas.Top="261" Width="120" FontFamily="Yu Gothic UI Light" Opacity="0.6" Background="Transparent" BorderBrush="#1b763b" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                         <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
-                            <Button Content="Iniciar sesión" Style="{StaticResource BotonRedondo}"  Canvas.Left="340" Canvas.Top="289" HorizontalAlignment="Center" VerticalAlignment="Top" Width="60" Height="22" FontSize="7" FontFamily="Yu Gothic UI Semibold" Click="IniciarSesionClick" />
-                            <Button Content="Registrar cuenta" Style="{StaticResource BotonRedondo}"  Canvas.Left="400" Canvas.Top="289" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="58" FontSize="7" FontFamily="Yu Gothic UI Semibold"/>
+                            <Button Content="Iniciar sesión" Style="{StaticResource BotonRedondoLogin}"  Canvas.Left="340" Canvas.Top="289" HorizontalAlignment="Center" VerticalAlignment="Top" Width="60" Height="22" FontSize="7" FontFamily="Yu Gothic UI Semibold" Click="IniciarSesionClick" />
+                            <Button Content="Registrar cuenta" Style="{StaticResource BotonRedondoRegister}"  Canvas.Left="400" Canvas.Top="289" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="58" FontSize="7" FontFamily="Yu Gothic UI Semibold"/>
                         </StackPanel>
-                        <Button x:Name="recuperarContraseña" Content="¿Has olvidado tu contraseña?" Canvas.Left="333" Canvas.Top="319" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" FontSize="8"  FontFamily="Yu Gothic UI Semibold" Visibility="Hidden"/>
-                        <Label Content="¿Has olvidado tu contraseña?" Canvas.Left="336" Canvas.Top="316" HorizontalAlignment="Center" VerticalAlignment="Center" Width="128" FontSize="8" FontWeight="Bold" Foreground="#9AA6B2" FontFamily="Yu Gothic UI Semibold" />
+                        <Button x:Name="recuperarContraseña" Content="¿Has olvidado tu contraseña?" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" FontSize="8"  FontFamily="Yu Gothic UI Semibold" Visibility="Hidden"/>
+                        <Label Content="¿Has olvidado tu contraseña?" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="8" FontWeight="Bold" Foreground="#9AA6B2" FontFamily="Yu Gothic UI Semibold" />
                         <Label x:Name="errorInicioSesion" Content="" Canvas.Left="381" Canvas.Top="25" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Border>

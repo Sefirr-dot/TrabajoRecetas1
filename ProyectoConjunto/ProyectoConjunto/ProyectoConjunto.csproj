@@ -11,7 +11,9 @@
   <ItemGroup>
     <None Remove="images\add.png" />
     <None Remove="images\aguacate.jpg" />
+    <None Remove="images\anterior.png" />
     <None Remove="images\arandano.jpg" />
+    <None Remove="images\background.jpg" />
     <None Remove="images\backgroung.jpg" />
     <None Remove="images\bowl.jpg" />
     <None Remove="images\cafe.jpg" />
@@ -29,20 +31,23 @@
     <None Remove="images\kiwi.jpg" />
     <None Remove="images\leche.jpg" />
     <None Remove="images\logintransparente.png" />
+    <None Remove="images\logo-ecofood.png" />
     <None Remove="images\mango.jpg" />
     <None Remove="images\manzana.jpg" />
+    <None Remove="images\noimage.jpg" />
     <None Remove="images\omelette.jpg" />
     <None Remove="images\panqueque.jpg" />
+    <None Remove="images\pasos.png" />
     <None Remove="images\pastel.jpg" />
     <None Remove="images\platano.jpg" />
     <None Remove="images\play.png" />
     <None Remove="images\PosibleFondo.jpg" />
     <None Remove="images\puzzle.png" />
+    <None Remove="images\siguiente.png" />
     <None Remove="images\te.jpg" />
     <None Remove="images\tick.png" />
     <None Remove="images\user.png" />
     <None Remove="images\zumo.jpg" />
-    <None Remove="vistas\fondo_cocina.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,7 +57,9 @@
   <ItemGroup>
     <Resource Include="images\add.png" />
     <Resource Include="images\aguacate.jpg" />
+    <Resource Include="images\anterior.png" />
     <Resource Include="images\arandano.jpg" />
+    <Resource Include="images\background.jpg" />
     <Resource Include="images\backgroung.jpg" />
     <Resource Include="images\bowl.jpg" />
     <Resource Include="images\cafe.jpg" />
@@ -72,20 +79,23 @@
     <Resource Include="images\kiwi.jpg" />
     <Resource Include="images\leche.jpg" />
     <Resource Include="images\logintransparente.png" />
+    <Resource Include="images\logo-ecofood.png" />
     <Resource Include="images\mango.jpg" />
     <Resource Include="images\manzana.jpg" />
+    <Resource Include="images\noimage.jpg" />
     <Resource Include="images\omelette.jpg" />
     <Resource Include="images\panqueque.jpg" />
+    <Resource Include="images\pasos.png" />
     <Resource Include="images\pastel.jpg" />
     <Resource Include="images\platano.jpg" />
     <Resource Include="images\play.png" />
     <Resource Include="images\PosibleFondo.jpg" />
     <Resource Include="images\puzzle.png" />
+    <Resource Include="images\siguiente.png" />
     <Resource Include="images\te.jpg" />
     <Resource Include="images\tick.png" />
     <Resource Include="images\user.png" />
     <Resource Include="images\zumo.jpg" />
-    <Resource Include="vistas\fondo_cocina.jpg" />
   </ItemGroup>
 
 </Project>
