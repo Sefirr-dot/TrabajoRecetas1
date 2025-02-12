@@ -1,6 +1,6 @@
 # 🍽️ Mi App de Recetas
 
-![Banner]([https://via.placeholder.com/1200x400.png?text=Mi+App+de+Recetas](https://static.vecteezy.com/system/resources/thumbnails/024/669/433/small/modern-empty-marble-tabletop-on-blurry-kitchen-interior-banner-generative-ai-illustration-photo.jpg))
+![Banner](https://i.imgur.com/8h66YXN.jpeg)
 
 Bienvenido a **Mi App de Recetas**, una aplicación donde puedes descubrir, valorar y compartir recetas con pasos detallados. Añade tus propias creaciones y ayuda a otros a mejorar sus habilidades culinarias. 
 
