@@ -32,14 +32,23 @@ Bienvenido a **Mi App de Recetas**, una aplicación donde puedes descubrir, valo
    ```bash
    cd mi-app-de-recetas
    ```
-3. Instala las dependencias:
+3. Asegúrate de tener .NET instalado. Si no lo tienes, descárgalo e instálalo desde [aquí](https://dotnet.microsoft.com/download/dotnet)
+4. Restaura las dependencias del proyecto:
    ```bash
-   npm install
+   dotnet restore
    ```
-4. Inicia la aplicación:
+5. Compila el proyecto:
    ```bash
-   npm start
+   dotnet build
    ```
+6. Ejecuta la aplicación:
+   ```bash
+   dotnet run
+   ```
+7. Configura MariaDB:
+   - Instala MariaDB desde [su sitio oficial](https://mariadb.org/download/).
+   - Crea una base de datos y configura la conexión en el archivo de configuración de la aplicación.
+   - Aplica las migraciones necesarias si existen.
 
 ## 🛠️ Tecnologías utilizadas
 
