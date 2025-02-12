@@ -8,7 +8,7 @@ namespace ProyectoConjunto.models
         private int id;
         private string nombre;
         private string dificultad;
-        private string duracion;
+        private int duracion;
         private string descripcion;
         private int idUsuario;
         private string imagen;
@@ -25,14 +25,14 @@ namespace ProyectoConjunto.models
             this.id = 0;
             this.nombre = string.Empty;
             this.dificultad = string.Empty;
-            this.duracion = string.Empty;
+            this.duracion = 0;
             this.descripcion = string.Empty;
             this.idUsuario = 0;
             this.imagen = string.Empty;
         }
 
         // Constructor con parámetros
-        public Receta(int id, string nombre, string dificultad, string duracion, string descripcion, int idUsuario, string imagen)
+        public Receta(int id, string nombre, string dificultad, int duracion, string descripcion, int idUsuario, string imagen)
         {
             this.id = id;
             this.nombre = nombre;
@@ -58,7 +58,7 @@ namespace ProyectoConjunto.models
             get => dificultad;
             set { dificultad = value; OnPropertyChanged(nameof(Dificultad)); }
         }
-        public string Duracion
+        public int Duracion
         {
             get => duracion;
             set { duracion = value; OnPropertyChanged(nameof(Duracion)); }

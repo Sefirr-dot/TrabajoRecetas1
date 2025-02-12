@@ -227,7 +227,7 @@
                                 <TextBlock Text="{Binding NumPaso}" Grid.Column="0" FontWeight="Bold" Margin="5"/>
 
                                 <TextBlock Text=" - " Grid.Column="1" Margin="5"/>
- 
+
                                 <TextBlock Text="{Binding Descripcion}" Grid.Column="2" Margin="5"/>
                             </Grid>
                         </Border>
@@ -255,14 +255,17 @@
                 </Border>
 
                 <!-- DataGrid para mostrar recetas -->
-                <DataGrid Name="DataGridRecetas" AutoGenerateColumns="False" Margin="4,70,0,0" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="790" Height="200" Grid.ColumnSpan="5" Grid.Column="1">
+                <DataGrid Name="dataGridrece" ItemsSource="{Binding Recetas}" Grid.ColumnSpan="6" Margin="0,0,29,392" AutoGenerateColumns="False" SelectionChanged="dataGridrece_SelectionChanged">
+                    <!-- Columna para mostrar el Nombre -->
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*" />
-                        <DataGridTemplateColumn Header="Creador" Width="*"/>
+                        <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*"/>
+
+                        <!-- Columna para mostrar el IdUsuario -->
+                        <DataGridTextColumn Header="Creador" Binding="{Binding IdUsuario}" Width="*"/>
                         <DataGridTemplateColumn Header="Acción">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Name="PlayReceta" Style="{StaticResource IconoBoton}" Command="{Binding PlayCommand}" ToolTip="Ver Pasos" Click="PlayReceta_Click" />
+                                    <Button Name="PlayReceta" Style="{StaticResource IconoBoton}"  ToolTip="Ver Pasos" Click="PlayReceta_Click" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -275,7 +278,7 @@
                 Margin="0,0,29,49" FontSize="18" ToolTip="Agregar nueva receta" Grid.Column="5" Click="AñadirReceta_Click" RenderTransformOrigin="-0.4,-0.2" />
 
                 <!-- Panel de receta con información adicional -->
-                <Border BorderBrush="#BCCCDC" BorderThickness="1" CornerRadius="10" Padding="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,294,0,0" Height="147" Width="325" Background="#BCCCDC" Grid.ColumnSpan="5" Grid.Column="1">
+                <Border BorderBrush="#BCCCDC" BorderThickness="1" CornerRadius="10" Padding="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,294,0,0" Height="147" Width="350" Background="#BCCCDC" Grid.ColumnSpan="5" Grid.Column="1">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Height="136" Width="255" Margin="0,-11,0,0">
 
                         <!-- Imagen de la receta -->

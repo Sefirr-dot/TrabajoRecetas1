@@ -1,4 +1,5 @@
-﻿using ProyectoConjunto.viewModels;
+﻿using ProyectoConjunto.models;
+using ProyectoConjunto.viewModels;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,24 +26,14 @@ namespace ProyectoConjunto
             InitializeComponent();
 
             recetaViewModel = new RecetaViewModel();
-            this.DataContext = recetaViewModel;
+            this.DataContext = new PrincipalViewModel();
 
-            // Crear datos directamente como una lista de diccionarios
-            var recetas = new List<Dictionary<string, object>>
-            {
-                new Dictionary<string, object> { { "Nombre", "Tarta de Manzana" }, { "Creador", "Chef Ana" } },
-                new Dictionary<string, object> { { "Nombre", "Paella Valenciana" }, { "Creador", "Chef Luis" } },
-                new Dictionary<string, object> { { "Nombre", "Brownie de Chocolate" }, { "Creador", "Chef María" } },
-                new Dictionary<string, object> { { "Nombre", "Pizza Margarita" }, { "Creador", "Chef José" } },
-                new Dictionary<string, object> { { "Nombre", "Sopa de Tomate" }, { "Creador", "Chef Laura" } }
-            };
 
-            // Asignar directamente la lista al DataGrid
-            DataGridRecetas.ItemsSource = recetas;
 
         }
 
         
+
         private void PlayReceta_Click(object sender, RoutedEventArgs e)
         {
             // Abrir ventna pasos
@@ -83,6 +74,20 @@ namespace ProyectoConjunto
             if (DataContext is RecetaViewModel viewModel)
             {
                 viewModel.AgregarPaso();
+            }
+        }
+
+        private void dataGridrece_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Verificar si el ítem seleccionado es de tipo Receta
+            if (dataGridrece.SelectedItem is Receta recetaSeleccionada)
+            {
+                // Asignar los valores de la receta a los Labels
+                NombreReceta.Content = recetaSeleccionada.Nombre.ToString();
+                TiempoReceta.Content = recetaSeleccionada.Duracion.ToString() + " min";
+                DificultadReceta.Content = recetaSeleccionada.Dificultad;
+
+
             }
         }
     }
