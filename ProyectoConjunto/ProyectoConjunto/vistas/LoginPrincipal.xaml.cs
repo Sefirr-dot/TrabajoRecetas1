@@ -1,4 +1,5 @@
-﻿using ProyectoConjunto.vistas;
+﻿using ProyectoConjunto.viewModels;
+using ProyectoConjunto.vistas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,16 +21,33 @@ namespace ProyectoConjunto
     /// </summary>
     public partial class LoginPrincipal : Window
     {
+
+        public LoginViewModel viewModel;
+
+
         public LoginPrincipal()
         {
             InitializeComponent();
+
+            viewModel = new LoginViewModel();
+            this.DataContext = viewModel;
         }
 
         private void IniciarSesionClick(object sender, RoutedEventArgs e)
         {
-            ListRecetas v = new ListRecetas();
-            v.Show();
-            this.Close();
+
+
+            if (viewModel.login())
+            {
+                ListRecetas v = new ListRecetas();
+                v.Show();
+                this.Close();
+            } else
+            {
+
+            }
         }
+
+
     }
 }
