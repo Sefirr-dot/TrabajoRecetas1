@@ -14,7 +14,7 @@ Bienvenido a **Mi App de Recetas**, una aplicación donde puedes descubrir, valo
 ## 📸 Capturas de pantalla
 
 ### Pantalla de Inicio
-![Inicio](https://via.placeholder.com/600x400.png?text=Pantalla+de+Inicio)
+![Inicio](https://i.imgur.com/wZ3hxeC.png)
 
 ### Detalle de Receta
 ![Detalle](https://via.placeholder.com/600x400.png?text=Detalle+de+Receta)
