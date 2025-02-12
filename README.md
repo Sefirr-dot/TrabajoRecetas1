@@ -59,7 +59,9 @@ Bienvenido a **Mi App de Recetas**, una aplicación donde puedes descubrir, valo
 
 ## 📌 Contribuciones
 
-¡Las contribuciones son bienvenidas! Si deseas agregar una función o corregir un error, abre un issue o haz un pull request. 
+-Chema God 100% codemaster
+-Davicillo data science Database Tunning Spectral Ghost
+-Miguelin Cabra Gónzalez GitHub Services God
 
 ## 📜 Licencia
 
