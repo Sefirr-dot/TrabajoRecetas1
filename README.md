@@ -26,7 +26,7 @@ Bienvenido a **Mi App de Recetas**, una aplicación donde puedes descubrir, valo
 
 1. Clona este repositorio:
    ```bash
-   git clone https://github.com/usuario/mi-app-de-recetas.git
+   git clone https://github.com/Sefirr-dot/TrabajoRecetas1
    ```
 2. Entra en la carpeta del proyecto:
    ```bash
