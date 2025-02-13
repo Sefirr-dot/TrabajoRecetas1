@@ -201,9 +201,6 @@ namespace ProyectoConjunto.repositorio
         public static Usuario cogerID(string user)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["MysqlConnection"].ConnectionString;
-
-            
-
             try
             {
                 using (MySqlConnection conn = new MySqlConnection(connectionString))

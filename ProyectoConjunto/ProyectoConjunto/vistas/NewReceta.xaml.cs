@@ -1,4 +1,5 @@
-﻿using ProyectoConjunto.viewModels;
+﻿using ProyectoConjunto.singleton;
+using ProyectoConjunto.viewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +23,13 @@ namespace ProyectoConjunto.vistas
     {
 
         private RecetaViewModel recetaViewModel;
+        
 
         public NewReceta()
         {
             InitializeComponent();
             recetaViewModel = new RecetaViewModel();
+            recetaViewModel.NombreUser = UsuarioSingleton.Nombre;
             this.DataContext = recetaViewModel;
         }
 

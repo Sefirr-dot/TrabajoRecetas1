@@ -14,7 +14,10 @@ namespace ProyectoConjunto.viewModels
         private Receta recetaAGuardar;
         private Pasos pasosALista;
         private ObservableCollection<Pasos> listaPasos;
+        private string nombreUser;
 
+
+        
         public RecetaViewModel()
         {
             recetaAGuardar = new Receta();
@@ -22,6 +25,15 @@ namespace ProyectoConjunto.viewModels
             listaPasos = new ObservableCollection<Pasos>();
         }
 
+        public string NombreUser
+        {
+            get => nombreUser;
+            set
+            {
+                nombreUser = value;
+                OnPropertyChanged(nameof(NombreUser));
+            }
+        }
         public Receta RecetaAGuardar
         {
             get => recetaAGuardar;
