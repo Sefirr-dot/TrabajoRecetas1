@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoConjunto.models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace ProyectoConjunto
     /// </summary>
     public partial class ventanaValoracion : Window
     {
-        public ventanaValoracion()
+        public ventanaValoracion(Receta receta)
         {
             InitializeComponent();
         }

@@ -19,9 +19,6 @@ namespace ProyectoConjunto.viewModels
             usuario = new Usuario();
         }
 
-
-
-
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public void OnPropertyChanged(string propertyName)

@@ -26,6 +26,7 @@ namespace ProyectoConjunto.viewModels
         public PasosViewModel()
         {
             repositorio = new Repositorio();
+            
         }
 
         public Receta RecetaSeleccionada
@@ -101,7 +102,7 @@ namespace ProyectoConjunto.viewModels
             if((posicionPaso + 1) == pasosReceta.Count)
             {
 
-                ventanaValoracion ven = new ventanaValoracion();
+                ventanaValoracion ven = new ventanaValoracion(recetaSeleccionada);
                 ven.Show();
                
 
@@ -164,9 +165,13 @@ namespace ProyectoConjunto.viewModels
 
             posicionPaso = 0;
 
+            totalPasos = pasosReceta.Count - 1;
+
             pasoActual = pasosReceta[posicionPaso];
 
             OnPropertyChanged(nameof(PasoActual));
+
+            OnPropertyChanged(nameof(TotalPasos));
 
             OnPropertyChanged(nameof(PosicionPaso));
 
