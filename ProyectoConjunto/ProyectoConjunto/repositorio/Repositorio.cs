@@ -101,5 +101,55 @@ namespace ProyectoConjunto.repositorio
             return false;
         }
 
+        public static Boolean registerUser(Usuario usuario)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["MysqlConnection"].ConnectionString;
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    // Verificar si el nombre de usuario ya existe
+                    string checkQuery = "SELECT COUNT(*) FROM usuarios WHERE nombre = @nombre";
+                    using (var checkCmd = new MySqlCommand(checkQuery, conn))
+                    {
+                        checkCmd.Parameters.AddWithValue("@nombre", usuario.Nombre);
+                        int userCount = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+                        if (userCount > 0)
+                        {
+                            MessageBox.Show("El nombre de usuario ya existe", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                            return false;
+                        }
+                    }
+
+                    // Insertar el nuevo usuario
+                    string query = "INSERT INTO usuarios (nombre, password) VALUES (@nombre, @password)";
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", usuario.Nombre);
+                        cmd.Parameters.AddWithValue("@password", usuario.Password);
+                        int result = cmd.ExecuteNonQuery();
+                        if (result > 0)
+                        {
+                            MessageBox.Show("Usuario registrado", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                            return true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Usuario no registrado", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al registrar el usuario: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            return false;
+        }
+
     }
 }

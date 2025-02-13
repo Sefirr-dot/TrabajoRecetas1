@@ -35,6 +35,12 @@ namespace ProyectoConjunto.viewModels
             return Repositorio.loginUser(u1);
         }
 
+        internal Boolean register()
+        {
+            Usuario usuario = new Usuario(0,Usuario.Nombre, Usuario.Password);
+            return Repositorio.registerUser(usuario);
+        }
+
         public Usuario Usuario
         {
             get => usuario;

@@ -42,12 +42,17 @@ namespace ProyectoConjunto
                 ListRecetas v = new ListRecetas();
                 v.Show();
                 this.Close();
-            } else
-            {
-
-            }
+            } 
         }
 
-
+        private void RegistraUserClick(object sender, RoutedEventArgs e)
+        {
+            if(viewModel.register())
+            {
+                ListRecetas v = new ListRecetas();
+                v.Show();
+                this.Close();
+            } 
+        }
     }
 }
