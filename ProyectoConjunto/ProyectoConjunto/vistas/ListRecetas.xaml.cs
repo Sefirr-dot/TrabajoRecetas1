@@ -1,5 +1,6 @@
 ﻿using ProyectoConjunto.models;
 using ProyectoConjunto.Models;
+using ProyectoConjunto.repositorio;
 using ProyectoConjunto.viewModels;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ProyectoConjunto.singleton;
 
 namespace ProyectoConjunto.vistas
 {
@@ -27,11 +29,12 @@ namespace ProyectoConjunto.vistas
 
         public ListaRecetasViewModel viewModel;
 
-        public ListRecetas(Usuario usuario)
+        public ListRecetas()
         {
             InitializeComponent();
-
-            viewModel = new ListaRecetasViewModel();
+            
+            viewModel = new ListaRecetasViewModel();        
+            viewModel.NombreUser = UsuarioSingleton.Nombre;
             this.DataContext = viewModel;
 
         }

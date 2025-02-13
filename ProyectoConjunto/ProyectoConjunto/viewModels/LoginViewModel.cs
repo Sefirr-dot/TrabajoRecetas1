@@ -32,6 +32,7 @@ namespace ProyectoConjunto.viewModels
         internal Boolean login()
         {
             Usuario u1 = new Usuario(0,Usuario.Nombre, Usuario.Password);
+
             return Repositorio.loginUser(u1);
         }
 

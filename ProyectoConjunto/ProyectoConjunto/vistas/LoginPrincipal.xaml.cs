@@ -1,4 +1,7 @@
-﻿using ProyectoConjunto.viewModels;
+﻿using ProyectoConjunto.models;
+using ProyectoConjunto.repositorio;
+using ProyectoConjunto.singleton;
+using ProyectoConjunto.viewModels;
 using ProyectoConjunto.vistas;
 using System;
 using System.Collections.Generic;
@@ -35,11 +38,13 @@ namespace ProyectoConjunto
 
         private void IniciarSesionClick(object sender, RoutedEventArgs e)
         {
-
+            
 
             if (viewModel.login())
             {
-                ListRecetas v = new ListRecetas(viewModel.Usuario);
+                Usuario u1 = Repositorio.cogerID(viewModel.Usuario.Nombre);
+                UsuarioSingleton.setUsuario(u1.Id, u1.Nombre, u1.Password);
+                ListRecetas v = new ListRecetas();
                 v.Show();
                 this.Close();
             } 
@@ -49,6 +54,8 @@ namespace ProyectoConjunto
         {
             if(viewModel.register())
             {
+                Usuario u1 = Repositorio.cogerID(viewModel.Usuario.Nombre);
+                UsuarioSingleton.setUsuario(u1.Id, u1.Nombre, u1.Password);
                 ListRecetas v = new ListRecetas();
                 v.Show();
                 this.Close();

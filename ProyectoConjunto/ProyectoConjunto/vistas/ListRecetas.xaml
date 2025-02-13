@@ -151,7 +151,7 @@
                 <StackPanel Orientation="Vertical">
                     <Image Height="160" Width="160" Source="/images/logo-ecofood.png"/>
                     <TextBlock Text="BIENVENIDO" HorizontalAlignment="Center" FontSize="25" FontFamily="Yu Gothic UI Semibold" Margin="0 30 0 0" FontWeight="Bold"/>
-                    <TextBlock Text="Jose Antonio Perez" HorizontalAlignment="Center" FontSize="15" FontFamily="Yu Gothic UI Semibold" Margin="0 10 0 0" FontWeight="Regular"/>
+                    <TextBlock Name="pruebas1" Text="{Binding NombreUser}" HorizontalAlignment="Center" FontSize="15" FontFamily="Yu Gothic UI Semibold" Margin="0 10 0 0" FontWeight="Regular"/>
                     <Button Content="+ Añadir Receta" Style="{StaticResource BotonRedondoLogin}" HorizontalAlignment="Center" FontSize="10" FontFamily="Yu Gothic UI Semibold" Margin="0 20 0 0" Click="Button_Click_1"/>
                     <Button Content="X" Style="{StaticResource BotonRedondoRegister}" HorizontalAlignment="Center" Width="58" FontSize="20" FontFamily="Yu Gothic UI Semibold" Margin="0 25 0 0" Click="Button_Click"/>
                 </StackPanel>
