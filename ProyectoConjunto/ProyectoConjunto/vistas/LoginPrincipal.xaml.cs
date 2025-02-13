@@ -39,7 +39,7 @@ namespace ProyectoConjunto
 
             if (viewModel.login())
             {
-                ListRecetas v = new ListRecetas();
+                ListRecetas v = new ListRecetas(viewModel.Usuario);
                 v.Show();
                 this.Close();
             } 

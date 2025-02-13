@@ -27,7 +27,7 @@ namespace ProyectoConjunto.vistas
 
         public ListaRecetasViewModel viewModel;
 
-        public ListRecetas()
+        public ListRecetas(Usuario usuario)
         {
             InitializeComponent();
 
