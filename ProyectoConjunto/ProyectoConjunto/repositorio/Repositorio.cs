@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using ProyectoConjunto.models;
+using ProyectoConjunto.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -59,6 +60,51 @@ namespace ProyectoConjunto.repositorio
             }
 
             return recetas;
+        }
+
+
+        public ObservableCollection<Pasos> CargarPasosDeReceta(int idReceta)
+        {
+            ObservableCollection<Pasos> pasos = new ObservableCollection<Pasos>();
+
+            string connectionString = ConfigurationManager.ConnectionStrings["MysqlConnection"].ConnectionString;
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string query = "SELECT id, numeroPaso, descripcion , idReceta FROM Pasos WHERE idReceta = @idReceta ORDER BY numeroPaso";
+
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@idReceta", idReceta);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Pasos paso = new Pasos
+                                {
+                                    Id = reader.GetInt32("id"),
+                                    NumPaso = Convert.ToInt32(reader["numeroPaso"]),
+                                    Descripcion = reader["descripcion"].ToString(),
+                                    IdReceta = reader.GetInt32("id")
+                                };
+
+                                pasos.Add(paso);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al cargar los pasos de la receta: " + ex.Message);
+            }
+
+            return pasos;
         }
 
         public static Boolean loginUser(Usuario usuario)

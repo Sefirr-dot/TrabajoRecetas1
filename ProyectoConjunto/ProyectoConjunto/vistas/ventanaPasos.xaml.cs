@@ -36,6 +36,7 @@ namespace ProyectoConjunto
 
 
             viewModel.RecetaSeleccionada = receta;
+            viewModel.cargarPasos(viewModel.RecetaSeleccionada.Id);
         }
 
         private void btn_siguiente_Click(object sender, RoutedEventArgs e)

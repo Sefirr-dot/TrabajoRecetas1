@@ -25,9 +25,7 @@ namespace ProyectoConjunto.viewModels
             
             repositorio = new Repositorio();
             listRecetas = repositorio.CargarRecetasDesdeBaseDeDatos();
-            //cargarRecetas();
-
-            MessageBox.Show(listRecetas.Count.ToString());
+            
         }
 
         public Receta RecetaSeleccionada

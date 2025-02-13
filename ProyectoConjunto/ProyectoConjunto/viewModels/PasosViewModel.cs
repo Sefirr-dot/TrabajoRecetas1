@@ -1,5 +1,6 @@
 ﻿using ProyectoConjunto.models;
 using ProyectoConjunto.Models;
+using ProyectoConjunto.repositorio;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,7 +14,8 @@ namespace ProyectoConjunto.viewModels
 {
     public class PasosViewModel : INotifyPropertyChanged
     {
-
+        
+        private Repositorio repositorio;
         private Receta recetaSeleccionada;
         private ObservableCollection<Pasos> pasosReceta;
         private int posicionPaso = 0;
@@ -23,20 +25,7 @@ namespace ProyectoConjunto.viewModels
 
         public PasosViewModel()
         {
-            recetaSeleccionada = new Receta();
-            pasosReceta = new ObservableCollection<Pasos>
-            {
-                new Pasos(1, 1, "Lava bien todas las verduras bajo el chorro de agua fría y sécalas con papel de cocina antes de cortarlas en trozos pequeños.", 101),
-                new Pasos(2, 2, "En una sartén grande, añade una cucharada de aceite de oliva y caliéntalo a fuego medio hasta que empiece a brillar.", 101),
-                new Pasos(3, 3, "Agrega la cebolla picada y sofríe durante unos 5 minutos hasta que esté transparente, removiendo constantemente.", 101),
-                new Pasos(4, 4, "Incorpora los tomates y el ajo picado, y cocina por otros 3 minutos hasta que los tomates comiencen a soltar su jugo.", 101),
-                new Pasos(5, 5, "Añade las especias y la sal, remueve bien para distribuir los sabores de manera uniforme en la preparación.", 101),
-                new Pasos(6, 6, "Reduce el fuego y deja cocinar a fuego lento durante 15 minutos, removiendo ocasionalmente para evitar que se pegue.", 101),
-                new Pasos(7, 7, "Una vez listo, retira del fuego y deja reposar por unos minutos antes de servir acompañado de arroz o pan tostado.", 101)
-            };
-
-            pasoActual = pasosReceta[posicionPaso];
-            totalPasos = pasosReceta.Count - 1;
+            repositorio = new Repositorio();
         }
 
         public Receta RecetaSeleccionada
@@ -114,6 +103,7 @@ namespace ProyectoConjunto.viewModels
 
                 ventanaValoracion ven = new ventanaValoracion();
                 ven.Show();
+               
 
             } else
             {
@@ -166,7 +156,21 @@ namespace ProyectoConjunto.viewModels
                 MessageBox.Show("No ha más pasos para mostrar");
             }
 
+        }
 
+        public void cargarPasos(int id)
+        {
+            pasosReceta = repositorio.CargarPasosDeReceta(id);
+
+            posicionPaso = 0;
+
+            pasoActual = pasosReceta[posicionPaso];
+
+            OnPropertyChanged(nameof(PasoActual));
+
+            OnPropertyChanged(nameof(PosicionPaso));
+
+            OnPropertyChanged(nameof(AvanceProgressBar));
 
 
         }
