@@ -234,5 +234,46 @@ namespace ProyectoConjunto.repositorio
             return new Usuario();
         }
 
+        public static void guardarValoracion(Valoraciones valoracion)
+        {
+
+            string connectionString = ConfigurationManager.ConnectionStrings["MysqlConnection"].ConnectionString;
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string query = "INSERT INTO valoraciones (puntuacion, comentario, idREceta, idUsuario) VALUES (@puntuacion, @comentario, @idREceta, @idUsuario)";
+
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+
+                        cmd.Parameters.AddWithValue("@puntuacion", valoracion.Puntuacion);
+                        cmd.Parameters.AddWithValue("@comentario", valoracion.Comentario);
+                        cmd.Parameters.AddWithValue("@idReceta", valoracion.IdReceta);
+                        cmd.Parameters.AddWithValue("@idUsuario", valoracion.IdUsuario);
+
+                        int result = cmd.ExecuteNonQuery();
+
+                        if (result > 0)
+                        {
+                            MessageBox.Show("Valoracion Guardada", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Valoración no guardada", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar la valoracion: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+
     }
 }

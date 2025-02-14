@@ -1,10 +1,13 @@
 ﻿using ProyectoConjunto.models;
+using ProyectoConjunto.repositorio;
+using ProyectoConjunto.singleton;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ProyectoConjunto.viewModels
 {
@@ -12,9 +15,16 @@ namespace ProyectoConjunto.viewModels
     {
 
         private Receta recetaSeleccionada;
+        private int valoracion;
+        private Valoraciones valoracionReceta;
 
         public ValoracionViewModel()
         {
+            valoracion = 0;
+            valoracionReceta = new Valoraciones();
+            recetaSeleccionada = new Receta();
+
+            
 
         }
 
@@ -28,6 +38,26 @@ namespace ProyectoConjunto.viewModels
             }
         }
 
+        public Valoraciones ValoracionReceta
+        {
+            get => valoracionReceta;
+            set
+            {
+                valoracionReceta = value;
+                OnPropertyChanged(nameof(ValoracionReceta));
+            }
+        }
+
+        public int Valoracion
+        {
+            get => valoracion;
+            set
+            {
+                valoracion = value;
+                OnPropertyChanged(nameof(Valoracion));
+            }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)
@@ -37,11 +67,16 @@ namespace ProyectoConjunto.viewModels
 
         private void actualizarRecetaActual(Receta receta)
         {
-            recetaSeleccionada = receta;
+            RecetaSeleccionada = receta;
             OnPropertyChanged(nameof(RecetaSeleccionada));
+
+            MessageBox.Show(RecetaSeleccionada.ToString());
         }
 
-
+        public void guardarValoracion()
+        {
+            Repositorio.guardarValoracion(valoracionReceta);
+        }
 
     }
 }

@@ -22,6 +22,8 @@
     <None Remove="images\customer.png" />
     <None Remove="images\disquete_white.png" />
     <None Remove="images\donas.jpg" />
+    <None Remove="images\estrella-blanca.png" />
+    <None Remove="images\estrella.png" />
     <None Remove="images\fondo_cocina.jpg" />
     <None Remove="images\fresa.jpg" />
     <None Remove="images\fresas.jpg" />
@@ -68,6 +70,8 @@
     <Resource Include="images\customer.png" />
     <Resource Include="images\disquete_white.png" />
     <Resource Include="images\donas.jpg" />
+    <Resource Include="images\estrella-blanca.png" />
+    <Resource Include="images\estrella.png" />
     <Resource Include="images\fondo_cocina.jpg" />
     <Resource Include="images\fresa.jpg" />
     <Resource Include="images\fresas.jpg" />
