@@ -52,6 +52,7 @@
     <None Remove="images\kiwi.jpg" />
     <None Remove="images\leche.jpg" />
     <None Remove="images\logintransparente.png" />
+    <None Remove="images\logo-ecofood.ico" />
     <None Remove="images\logo-ecofood.png" />
     <None Remove="images\mango.jpg" />
     <None Remove="images\manzana.jpg" />
@@ -121,6 +122,7 @@
     <Resource Include="images\kiwi.jpg" />
     <Resource Include="images\leche.jpg" />
     <Resource Include="images\logintransparente.png" />
+    <Resource Include="images\logo-ecofood.ico" />
     <Resource Include="images\logo-ecofood.png" />
     <Resource Include="images\mango.jpg" />
     <Resource Include="images\manzana.jpg" />
