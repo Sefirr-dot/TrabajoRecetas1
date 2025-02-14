@@ -17,6 +17,7 @@ namespace ProyectoConjunto.viewModels
 
         private Receta recetaSeleccionada;
         public ObservableCollection<Receta> listRecetas {  get; set; }
+        
         private int id;
         private Repositorio repositorio;
         private string nombreUser;
@@ -26,6 +27,7 @@ namespace ProyectoConjunto.viewModels
             
             repositorio = new Repositorio();
             listRecetas = repositorio.CargarRecetasDesdeBaseDeDatos();
+            
             
         }
 

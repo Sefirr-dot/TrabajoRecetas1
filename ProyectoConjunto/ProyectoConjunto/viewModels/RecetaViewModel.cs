@@ -6,6 +6,7 @@ using System.IO;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
+using ProyectoConjunto.repositorio;
 
 namespace ProyectoConjunto.viewModels
 {
@@ -14,6 +15,8 @@ namespace ProyectoConjunto.viewModels
         private Receta recetaAGuardar;
         private Pasos pasosALista;
         private ObservableCollection<Pasos> listaPasos;
+        private Repositorio repositorio;
+        public ObservableCollection<Ingredientes> listIngredientes { get; set; }
         private string nombreUser;
 
 
@@ -22,7 +25,9 @@ namespace ProyectoConjunto.viewModels
         {
             recetaAGuardar = new Receta();
             pasosALista = new Pasos();
+            repositorio = new Repositorio();
             listaPasos = new ObservableCollection<Pasos>();
+            listIngredientes = repositorio.CargarIngredientes();
         }
 
         public string NombreUser
@@ -103,7 +108,7 @@ namespace ProyectoConjunto.viewModels
                     string base64String = Convert.ToBase64String(imageBytes);
 
                     // Mostrar en un MessageBox (solo para pruebas)
-                    MessageBox.Show($"Imagen en Base64:\n{base64String.Substring(0, 100)}...");
+                    MessageBox.Show(base64String);
 
                     // Guardar el Base64 en el objeto RecetaAGuardar
                     RecetaAGuardar.Imagen = base64String;

@@ -34,6 +34,7 @@ namespace ProyectoConjunto
 
             viewModel = new LoginViewModel();
             this.DataContext = viewModel;
+
         }
 
         private void IniciarSesionClick(object sender, RoutedEventArgs e)

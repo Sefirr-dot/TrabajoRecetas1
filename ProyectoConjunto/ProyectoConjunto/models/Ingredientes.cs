@@ -20,6 +20,7 @@ namespace ProyectoConjunto.models
             this.imagen = imagen;
         }
 
+
         public int Id { get => id; set => id = value; }
         public string Nombre { get => nombre; set => nombre = value; }
         public string Imagen { get => imagen; set => imagen = value; }

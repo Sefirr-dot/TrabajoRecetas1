@@ -63,6 +63,49 @@ namespace ProyectoConjunto.repositorio
             return recetas;
         }
 
+        public ObservableCollection<Ingredientes> CargarIngredientes()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["MysqlConnection"].ConnectionString;
+
+            ObservableCollection<Ingredientes> ingredientes = new ObservableCollection<Ingredientes>();
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string query = "SELECT id, nombre, imagen FROM ingredientes";
+
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // Crear una nueva receta y asignar los valores
+                                int id = Convert.ToInt32(reader["id"]);
+                                string nombre = reader["nombre"].ToString();
+                                string imagen = reader["imagen"].ToString();
+
+                                // Crear el objeto Receta
+                                Ingredientes ing = new Ingredientes(id, nombre, imagen);
+
+                                // Añadir la receta a la lista
+                                ingredientes.Add(ing);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar las recetas: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return ingredientes;
+        }
+
 
         public ObservableCollection<Pasos> CargarPasosDeReceta(int idReceta)
         {
