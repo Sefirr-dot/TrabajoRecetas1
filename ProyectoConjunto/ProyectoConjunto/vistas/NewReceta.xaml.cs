@@ -1,4 +1,5 @@
-﻿using ProyectoConjunto.singleton;
+﻿using ProyectoConjunto.Models;
+using ProyectoConjunto.singleton;
 using ProyectoConjunto.viewModels;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,8 @@ namespace ProyectoConjunto.vistas
             recetaViewModel = new RecetaViewModel();
             recetaViewModel.NombreUser = UsuarioSingleton.Nombre;
             this.DataContext = recetaViewModel;
+
+            recetaViewModel.PasosALista.NumPaso = recetaViewModel.ListaPasos.Count() + 1;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -56,9 +59,60 @@ namespace ProyectoConjunto.vistas
 
         private void add_paso_Click(object sender, RoutedEventArgs e)
         {
-            if (DataContext is RecetaViewModel viewModel)
+            if (DataContext is RecetaViewModel recetaViewModel)
             {
-                viewModel.AgregarPaso();
+                recetaViewModel.AgregarPaso();
+                recetaViewModel.PasosALista.NumPaso = recetaViewModel.ListaPasos.Count() + 1;
+            }
+        }
+
+        private void delete(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is RecetaViewModel recetaViewModel)
+            {
+
+                Pasos p = (Pasos) tvPasos.SelectedItem;
+
+                if (p != null)
+                {
+
+                    MessageBoxResult result = MessageBox.Show(
+                        "¿Estás seguro de que deseas eliminar este elemento?",
+                        "Confirmación",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Warning
+                    );
+
+                    // Si el usuario presiona "Sí", procedemos con la eliminación
+                    if (result == MessageBoxResult.Yes)
+                    {
+
+                        recetaViewModel.ListaPasos.Remove(p);
+
+                        for (int i = 0; i < recetaViewModel.ListaPasos.Count(); i++)
+                        {
+
+                            recetaViewModel.ListaPasos[i].NumPaso = i + 1;
+
+                            recetaViewModel.PasosALista.NumPaso = recetaViewModel.ListaPasos.Count() + 1;
+
+                        }
+
+                        MessageBox.Show("Elemento eliminado con éxito.", "Eliminado", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    }
+
+                    
+
+                } else
+                {
+
+                    MessageBox.Show("Debes de seleccionar primero el paso que quieres borrar");
+
+                }
+
+                
+
             }
         }
     }

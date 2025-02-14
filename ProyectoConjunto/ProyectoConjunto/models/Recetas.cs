@@ -12,6 +12,7 @@ namespace ProyectoConjunto.models
         private string descripcion;
         private int idUsuario;
         private string imagen;
+        private float mediaValoracion;
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
@@ -29,6 +30,7 @@ namespace ProyectoConjunto.models
             this.descripcion = "None";
             this.idUsuario = 0;
             this.imagen = "/images/noimage.jpg";
+            this.mediaValoracion = 0;
         }
 
         // Constructor con parámetros
@@ -41,6 +43,7 @@ namespace ProyectoConjunto.models
             this.descripcion = descripcion;
             this.idUsuario = idUsuario;
             this.imagen = imagen;
+            this.mediaValoracion = 0;
         }
 
         public int Id
@@ -78,6 +81,12 @@ namespace ProyectoConjunto.models
         {
             get => imagen;
             set { imagen = value; OnPropertyChanged(nameof(Imagen)); }
+        }
+
+        public float MediaValoracion
+        {
+            get => mediaValoracion;
+            set { mediaValoracion = value; OnPropertyChanged(nameof(MediaValoracion)); }
         }
     }
 }

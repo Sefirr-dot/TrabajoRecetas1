@@ -15,6 +15,7 @@
     <None Remove="images\arandano.jpg" />
     <None Remove="images\background.jpg" />
     <None Remove="images\backgroung.jpg" />
+    <None Remove="images\borrar.png" />
     <None Remove="images\bowl.jpg" />
     <None Remove="images\cafe.jpg" />
     <None Remove="images\clock.png" />
@@ -83,6 +84,7 @@
     <Resource Include="images\arandano.jpg" />
     <Resource Include="images\background.jpg" />
     <Resource Include="images\backgroung.jpg" />
+    <Resource Include="images\borrar.png" />
     <Resource Include="images\bowl.jpg" />
     <Resource Include="images\cafe.jpg" />
     <Resource Include="images\clock.png" />

@@ -201,6 +201,29 @@
             </Style.Triggers>
         </Style>
 
+        <Style x:Key="BotonDelete" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Width" Value="15"/>
+            <Setter Property="Height" Value="15"/>
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+CornerRadius="5" 
+BorderThickness="1">
+                            <Grid>
+                                <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="/images/borrar.png" Width="15"/>
+                                </StackPanel>
+
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="textBox" TargetType="TextBox">
             <Setter Property="BorderThickness" Value="0,0,0,1"/>
             <Setter Property="FontFamily" Value="Yu Gothic UI Light"/>
@@ -289,14 +312,14 @@
                                 <DataTemplate>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="220"/>
                                             <ColumnDefinition Width="50"/>
-                                            <!-- Para el número de paso -->
-                                            <ColumnDefinition Width="*"/>
-                                            <!-- Para la descripción -->
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Text="{Binding NumPaso}" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Top"/>
+                                        <TextBlock Text="{Binding NumPaso}" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center"/>
                                         <TextBlock Text="{Binding Descripcion}" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                        <Button Style="{StaticResource BotonDelete}" Width="40" Height="30" Grid.Column="2" HorizontalAlignment="Right" Click="delete"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
