@@ -28,6 +28,7 @@ namespace ProyectoConjunto.repositorio
                 {
                     conn.Open();
 
+
                     string query = "SELECT id, nombre, dificultad, duracion, descripcion, idUsuario, imagen FROM recetas";
 
                     using (var cmd = new MySqlCommand(query, conn))
@@ -36,7 +37,7 @@ namespace ProyectoConjunto.repositorio
                         {
                             while (reader.Read())
                             {
-                                // Crear una nueva receta y asignar los valores
+
                                 int id = Convert.ToInt32(reader["id"]);
                                 string nombre = reader["nombre"].ToString();
                                 string dificultad = reader["dificultad"].ToString();
@@ -45,10 +46,13 @@ namespace ProyectoConjunto.repositorio
                                 int idUsuario = Convert.ToInt32(reader["idUsuario"]);
                                 string imagen = reader["imagen"].ToString();
 
-                                // Crear el objeto Receta
-                                Receta receta = new Receta(id, nombre, dificultad, duracion, descripcion, idUsuario, imagen);
+                                // Obtener la media de las valoraciones para esta receta
+                                double mediaValoraciones = ObtenerMediaValoracionesPorReceta(id);
 
-                                // Añadir la receta a la lista
+                                // Crear el objeto Receta con la media
+                                Receta receta = new Receta(id, nombre, dificultad, duracion, descripcion, idUsuario, imagen, mediaValoraciones);
+
+
                                 recetas.Add(receta);
                             }
                         }
@@ -62,6 +66,42 @@ namespace ProyectoConjunto.repositorio
 
             return recetas;
         }
+
+        // Método para obtener la media de las valoraciones de una receta
+        public double ObtenerMediaValoracionesPorReceta(int idReceta)
+        {
+            double media = 0.0;
+            string connectionString = ConfigurationManager.ConnectionStrings["MysqlConnection"].ConnectionString;
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string query = "SELECT AVG(puntuacion) AS MediaValoraciones FROM valoraciones WHERE idReceta = @idReceta";
+
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@idReceta", idReceta);
+
+                        // Ejecutar la consulta y obtener el resultado de la media
+                        var result = cmd.ExecuteScalar();
+                        if (result != DBNull.Value)
+                        {
+                            media = Convert.ToDouble(result);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener la media de las valoraciones: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return media;
+        }
+
 
         public ObservableCollection<Ingredientes> CargarIngredientes()
         {

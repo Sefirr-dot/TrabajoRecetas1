@@ -12,15 +12,16 @@ namespace ProyectoConjunto.models
         private string descripcion;
         private int idUsuario;
         private string imagen;
-        private float mediaValoracion;
+        private double mediaValoraciones;
 
         public event PropertyChangedEventHandler PropertyChanged;
+
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        // Constructor vacío
+
         public Receta()
         {
             this.id = 0;
@@ -30,11 +31,10 @@ namespace ProyectoConjunto.models
             this.descripcion = "None";
             this.idUsuario = 0;
             this.imagen = "/images/noimage.jpg";
-            this.mediaValoracion = 0;
+            this.mediaValoraciones = 0.0;
         }
 
-        // Constructor con parámetros
-        public Receta(int id, string nombre, string dificultad, string duracion, string descripcion, int idUsuario, string imagen)
+        public Receta(int id, string nombre, string dificultad, string duracion, string descripcion, int idUsuario, string imagen, double mediaValoraciones)
         {
             this.id = id;
             this.nombre = nombre;
@@ -43,7 +43,7 @@ namespace ProyectoConjunto.models
             this.descripcion = descripcion;
             this.idUsuario = idUsuario;
             this.imagen = imagen;
-            this.mediaValoracion = 0;
+            this.mediaValoraciones = mediaValoraciones;
         }
 
         public int Id
@@ -51,26 +51,31 @@ namespace ProyectoConjunto.models
             get => id;
             set { id = value; OnPropertyChanged(nameof(Id)); }
         }
+
         public string Nombre
         {
             get => nombre;
             set { nombre = value; OnPropertyChanged(nameof(Nombre)); }
         }
+
         public string Dificultad
         {
             get => dificultad;
             set { dificultad = value; OnPropertyChanged(nameof(Dificultad)); }
         }
+
         public string Duracion
         {
             get => duracion;
             set { duracion = value; OnPropertyChanged(nameof(Duracion)); }
         }
+
         public string Descripcion
         {
             get => descripcion;
             set { descripcion = value; OnPropertyChanged(nameof(Descripcion)); }
         }
+
         public int IdUsuario
         {
             get => idUsuario;
@@ -83,10 +88,10 @@ namespace ProyectoConjunto.models
             set { imagen = value; OnPropertyChanged(nameof(Imagen)); }
         }
 
-        public float MediaValoracion
+        public double MediaValoraciones
         {
-            get => mediaValoracion;
-            set { mediaValoracion = value; OnPropertyChanged(nameof(MediaValoracion)); }
+            get => mediaValoraciones;
+            set { mediaValoraciones = value; OnPropertyChanged(nameof(MediaValoraciones)); }
         }
     }
 }

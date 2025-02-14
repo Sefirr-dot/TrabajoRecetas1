@@ -185,10 +185,10 @@
                     </DataGridTemplateColumn>
 
                     <!-- Columna del Subtítulo -->
-                    <DataGridTemplateColumn Header="Autor" Width="1*">
+                    <DataGridTemplateColumn Header="Media de Valoraciones" Width="1*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding IdUsuario}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding MediaValoraciones}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

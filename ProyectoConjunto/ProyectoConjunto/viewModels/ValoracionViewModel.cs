@@ -17,14 +17,15 @@ namespace ProyectoConjunto.viewModels
         private Receta recetaSeleccionada;
         private int valoracion;
         private Valoraciones valoracionReceta;
+        private Repositorio repositorio;
 
         public ValoracionViewModel()
         {
             valoracion = 0;
             valoracionReceta = new Valoraciones();
             recetaSeleccionada = new Receta();
+            repositorio = new Repositorio();
 
-            
 
         }
 
@@ -68,14 +69,25 @@ namespace ProyectoConjunto.viewModels
         private void actualizarRecetaActual(Receta receta)
         {
             RecetaSeleccionada = receta;
+            double mediaActualizada = repositorio.ObtenerMediaValoracionesPorReceta(recetaSeleccionada.Id);
+
+            // Actualizar la propiedad en la receta seleccionada
+            recetaSeleccionada.MediaValoraciones = mediaActualizada;
+
             OnPropertyChanged(nameof(RecetaSeleccionada));
 
-            MessageBox.Show(RecetaSeleccionada.ToString());
         }
 
         public void guardarValoracion()
         {
+
             Repositorio.guardarValoracion(valoracionReceta);
+
+            actualizarRecetaActual(recetaSeleccionada);
+
+
+
+
         }
 
     }
