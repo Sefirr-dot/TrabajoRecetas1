@@ -65,6 +65,7 @@ namespace ProyectoConjunto.vistas
         private void btn_guardar_Click(object sender, RoutedEventArgs e)
         {
             recetaViewModel.pillarDatos();
+            recetaViewModel.nuevaReceta();
             limpiarPantalla();
 
         }

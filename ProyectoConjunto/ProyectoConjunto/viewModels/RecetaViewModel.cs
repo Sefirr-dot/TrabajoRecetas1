@@ -37,6 +37,12 @@ namespace ProyectoConjunto.viewModels
             listIngredientesSeleccionados = new ObservableCollection<Ingredientes>();
         }
 
+        public void nuevaReceta()
+        {
+            RecetaAGuardar = new Receta();
+            OnPropertyChanged(nameof(RecetaAGuardar));
+        }
+
         public ObservableCollection<Ingredientes> ListIngredientesSeleccionados
         {
             get => ListIngredientesSeleccionados;
