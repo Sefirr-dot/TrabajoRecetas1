@@ -6,7 +6,7 @@
         Icon="/images/logo-ecofood.ico"
         xmlns:local="clr-namespace:ProyectoConjunto.vistas"
         mc:Ignorable="d"
-        Title="Listado de Rcetas" Height="450" Width="800">
+        Title="Listado de Rcetas" Height="900" Width="800">
     <Window.Resources>
         <Style x:Key="borddeFondo" TargetType="Border">
             <Setter Property="BorderBrush">
@@ -241,7 +241,9 @@
 
                     </StackPanel>
                 </Grid>
+                
             </Grid>
+            
         </StackPanel>
     </Grid>
 </Window>
