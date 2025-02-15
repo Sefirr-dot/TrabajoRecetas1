@@ -67,6 +67,96 @@ namespace ProyectoConjunto.repositorio
             return recetas;
         }
 
+        public static ObservableCollection<Ingredientes> CargarIngredientesReceta(Receta rec)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["MysqlConnection"].ConnectionString;
+
+            ObservableCollection<Ingredientes> ing = new ObservableCollection<Ingredientes>();
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+
+
+                    string query = "SELECT i.id, i.nombre, i.imagen FROM Ingredientes i INNER JOIN IngredientesRecetas ir ON i.id = ir.idIngrediente WHERE idReceta = " + rec.Id;
+
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        using (var reader = cmd.ExecuteReader())
+                        {
+
+                            while (reader.Read())
+                            {
+
+                                int id = Convert.ToInt32(reader["id"]);
+                                string nombre = reader["nombre"].ToString();
+                                string imagen = reader["imagen"].ToString();
+
+                                // Crear el objeto Receta con la media
+                                Ingredientes ingre = new Ingredientes(id, nombre , imagen);
+
+
+                                ing.Add(ingre);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar las recetas: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return ing;
+        }
+
+        public static ObservableCollection<Pasos> CargarPasosReceta(Receta rec)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["MysqlConnection"].ConnectionString;
+
+            ObservableCollection<Pasos> pas= new ObservableCollection<Pasos>();
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+
+
+                    string query = "SELECT id, numeroPaso, descripcion FROM pasos WHERE idReceta = " + rec.Id;
+
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        using (var reader = cmd.ExecuteReader())
+                        {
+
+                            while (reader.Read())
+                            {
+
+                                int id = Convert.ToInt32(reader["id"]);
+                                int numPaso = Convert.ToInt32(reader["numeroPaso"]);
+                                string descripcion = reader["descripcion"].ToString();
+
+                                // Crear el objeto Receta con la media
+                                Pasos pa = new Pasos(id, numPaso, descripcion, rec.Id);
+
+
+                                pas.Add(pa);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar las recetas: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return pas;
+        }
+
         // Método para obtener la media de las valoraciones de una receta
         public double ObtenerMediaValoracionesPorReceta(int idReceta)
         {
