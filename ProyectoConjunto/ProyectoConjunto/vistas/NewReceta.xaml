@@ -292,7 +292,7 @@ BorderThickness="1">
                     </StackPanel>
                     <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Vertical" Grid.ColumnSpan="3">
                         <TextBlock Text="Selecciona tus ingredientes:" FontFamily="Yu Gothic UI Light"/>
-                        <ListBox Name="ListaIngredientes" Height="65" SelectionMode="Multiple" Margin="0 10 5 0" ItemsSource="{Binding listIngredientes}">
+                        <ListBox Name="ListaIngredientes" Height="65" SelectionMode="Multiple" Margin="0 10 5 0" ItemsSource="{Binding listIngredientes}" SelectionChanged="IngredientesListBox_SelectionChanged">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Margin="5">

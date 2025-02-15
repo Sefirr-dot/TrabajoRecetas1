@@ -303,7 +303,7 @@ namespace ProyectoConjunto.repositorio
                                 int id = Convert.ToInt32(reader["id"]);
                                 string nombre = reader["nombre"].ToString();
                                 string password = reader["password"].ToString();
-                                return new Usuario(id,nombre,password);
+                                return new Usuario(id, nombre, password);
                             }
                         }
                     }
@@ -358,5 +358,76 @@ namespace ProyectoConjunto.repositorio
 
         }
 
+        public static int InsertarRecetaCompleta(Receta receta, ObservableCollection<Pasos> listaPasos, ObservableCollection<Ingredientes> ingredientes)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["MysqlConnection"].ConnectionString;
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                using (MySqlTransaction transaction = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        // 1. Insertar la receta principal
+                        string queryReceta = @"INSERT INTO Recetas (nombre, dificultad, duracion, descripcion, idUsuario, imagen) 
+                                     VALUES (@nombre, @dificultad, @duracion, @descripcion, @idUsuario, @imagen);
+                                     SELECT LAST_INSERT_ID();";
+
+                        int idReceta;
+                        using (var cmd = new MySqlCommand(queryReceta, conn, transaction))
+                        {
+                            cmd.Parameters.AddWithValue("@nombre", receta.Nombre);
+                            cmd.Parameters.AddWithValue("@dificultad", receta.Dificultad);
+                            cmd.Parameters.AddWithValue("@duracion", receta.Duracion);
+                            cmd.Parameters.AddWithValue("@descripcion", receta.Descripcion);
+                            cmd.Parameters.AddWithValue("@idUsuario", receta.IdUsuario);
+                            cmd.Parameters.AddWithValue("@imagen", receta.Imagen);
+
+                            idReceta = Convert.ToInt32(cmd.ExecuteScalar());
+                        }
+
+                        // 2. Insertar los pasos
+                        string queryPasos = @"INSERT INTO Pasos (numeroPaso, descripcion, idReceta) 
+                                    VALUES (@numeroPaso, @descripcion, @idReceta)";
+
+                        foreach (var paso in listaPasos)
+                        {
+                            using (var cmd = new MySqlCommand(queryPasos, conn, transaction))
+                            {
+                                cmd.Parameters.AddWithValue("@numeroPaso", paso.NumPaso);
+                                cmd.Parameters.AddWithValue("@descripcion", paso.Descripcion);
+                                cmd.Parameters.AddWithValue("@idReceta", idReceta);
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+
+                        // 3. Insertar los ingredientes
+                        string queryIngredientes = @"INSERT INTO ingredientesrecetas (idIngrediente, idReceta) 
+                                           VALUES (@idIngrediente, @idReceta)";
+
+                        foreach (var ingrediente in ingredientes)
+                        {
+                            using (var cmd = new MySqlCommand(queryIngredientes, conn, transaction))
+                            {
+                                cmd.Parameters.AddWithValue("@idIngrediente", ingrediente.Id);
+                                cmd.Parameters.AddWithValue("@idReceta", idReceta);
+
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+
+                        transaction.Commit();
+                        return idReceta;
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw new Exception("Error al insertar la receta: " + ex.Message);
+                    }
+                }
+            }
+
+        }
     }
 }

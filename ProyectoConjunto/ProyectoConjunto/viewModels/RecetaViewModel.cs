@@ -7,6 +7,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using ProyectoConjunto.repositorio;
+using System.Collections;
+using ProyectoConjunto.singleton;
 
 namespace ProyectoConjunto.viewModels
 {
@@ -17,6 +19,10 @@ namespace ProyectoConjunto.viewModels
         private ObservableCollection<Pasos> listaPasos;
         private Repositorio repositorio;
         public ObservableCollection<Ingredientes> listIngredientes { get; set; }
+        public ObservableCollection<Ingredientes> listIngredientesSeleccionados { get; set; }
+
+        private ObservableCollection<Ingredientes> listIngredientesReceta = new ObservableCollection<Ingredientes>();
+
         private string nombreUser;
 
 
@@ -28,6 +34,27 @@ namespace ProyectoConjunto.viewModels
             repositorio = new Repositorio();
             listaPasos = new ObservableCollection<Pasos>();
             listIngredientes = repositorio.CargarIngredientes();
+            listIngredientesSeleccionados = new ObservableCollection<Ingredientes>();
+        }
+
+        public ObservableCollection<Ingredientes> ListIngredientesSeleccionados
+        {
+            get => ListIngredientesSeleccionados;
+            set
+            {
+                ListIngredientesSeleccionados = value;
+                OnPropertyChanged(nameof(listIngredientesSeleccionados));
+            }
+        }
+
+        public ObservableCollection<Ingredientes> ListIngredientes
+        {
+            get => listIngredientes;
+            set
+            {
+                listIngredientes = value;
+                OnPropertyChanged(nameof(ListIngredientes));
+            }
         }
 
         public string NombreUser
@@ -94,9 +121,30 @@ namespace ProyectoConjunto.viewModels
             }
         }
 
+
+        public void ActualizarIngredientesSeleccionados(IList seleccionados)
+        {
+            listIngredientesSeleccionados.Clear();
+            foreach (Ingredientes ingrediente in seleccionados)
+            {
+                listIngredientesSeleccionados.Add(ingrediente);
+            }
+            OnPropertyChanged(nameof(listIngredientesSeleccionados));
+        }
+
+        public void AniadirIngredientesReceta()
+        {
+            foreach (Ingredientes ingrediente in listIngredientesSeleccionados)
+            {
+                listIngredientesReceta.Add(ingrediente);
+            }
+            OnPropertyChanged(nameof(listIngredientesReceta));
+        }
         // Método para mostrar la imagen en un MessageBox (opcional)
         public void pillarDatos()
         {
+
+
             if (!string.IsNullOrEmpty(RecetaAGuardar.Imagen) && File.Exists(RecetaAGuardar.Imagen))
             {
                 try
@@ -115,11 +163,16 @@ namespace ProyectoConjunto.viewModels
 
                     // Notificar cambios a la UI
                     OnPropertyChanged(nameof(RecetaAGuardar.Imagen));
+                    
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Error al convertir la imagen: {ex.Message}");
                 }
+
+                RecetaAGuardar.IdUsuario = UsuarioSingleton.id;
+                AniadirIngredientesReceta();
+                Repositorio.InsertarRecetaCompleta(RecetaAGuardar, ListaPasos, listIngredientesReceta);
             }
             else
             {

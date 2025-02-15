@@ -24,7 +24,7 @@ namespace ProyectoConjunto.vistas
     {
 
         private RecetaViewModel recetaViewModel;
-        
+
 
         public NewReceta()
         {
@@ -71,7 +71,7 @@ namespace ProyectoConjunto.vistas
             if (DataContext is RecetaViewModel recetaViewModel)
             {
 
-                Pasos p = (Pasos) tvPasos.SelectedItem;
+                Pasos p = (Pasos)tvPasos.SelectedItem;
 
                 if (p != null)
                 {
@@ -102,17 +102,25 @@ namespace ProyectoConjunto.vistas
 
                     }
 
-                    
 
-                } else
+
+                }
+                else
                 {
 
                     MessageBox.Show("Debes de seleccionar primero el paso que quieres borrar");
 
                 }
 
-                
 
+
+            }
+        }
+        private void IngredientesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DataContext is RecetaViewModel viewModel)
+            {
+                viewModel.ActualizarIngredientesSeleccionados(ListaIngredientes.SelectedItems);
             }
         }
     }

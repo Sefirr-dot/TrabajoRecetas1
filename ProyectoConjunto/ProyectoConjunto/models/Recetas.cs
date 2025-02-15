@@ -1,5 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
 
 namespace ProyectoConjunto.models
 {
@@ -13,6 +16,7 @@ namespace ProyectoConjunto.models
         private int idUsuario;
         private string imagen;
         private double mediaValoraciones;
+        public BitmapImage Imagen64 { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -32,6 +36,30 @@ namespace ProyectoConjunto.models
             this.idUsuario = 0;
             this.imagen = "/images/noimage.jpg";
             this.mediaValoraciones = 0.0;
+            this.Imagen64 = null;
+        }
+        private ImageSource ConvertBase64ToImage(string imagen)
+        {
+            if (string.IsNullOrEmpty(imagen))
+                return null;
+
+            try
+            {
+                byte[] imageBytes = Convert.FromBase64String(imagen);
+                using (MemoryStream memoryStream = new MemoryStream(imageBytes))
+                {
+                    BitmapImage bitmapImage = new BitmapImage();
+                    bitmapImage.BeginInit();
+                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmapImage.StreamSource = memoryStream;
+                    bitmapImage.EndInit();
+                    return bitmapImage;
+                }
+            }
+            catch
+            {
+                return null; // Devuelve null si hay un error en la conversión
+            }
         }
 
         public Receta(int id, string nombre, string dificultad, string duracion, string descripcion, int idUsuario, string imagen, double mediaValoraciones)
@@ -44,6 +72,7 @@ namespace ProyectoConjunto.models
             this.idUsuario = idUsuario;
             this.imagen = imagen;
             this.mediaValoraciones = mediaValoraciones;
+            this.Imagen64 = (BitmapImage?)ConvertBase64ToImage(imagen);
         }
 
         public int Id
