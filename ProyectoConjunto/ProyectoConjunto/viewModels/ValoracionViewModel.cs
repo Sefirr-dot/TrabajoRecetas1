@@ -71,12 +71,15 @@ namespace ProyectoConjunto.viewModels
             RecetaSeleccionada = receta;
             double mediaActualizada = repositorio.ObtenerMediaValoracionesPorReceta(recetaSeleccionada.Id);
 
+            // Redondear el valor a 2 decimales
+            mediaActualizada = Math.Round(mediaActualizada, 2);
+
             // Actualizar la propiedad en la receta seleccionada
             recetaSeleccionada.MediaValoraciones = mediaActualizada;
 
             OnPropertyChanged(nameof(RecetaSeleccionada));
-
         }
+
 
         public void guardarValoracion()
         {
