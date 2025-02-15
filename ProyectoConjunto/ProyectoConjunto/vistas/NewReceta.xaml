@@ -335,7 +335,7 @@ BorderThickness="1">
                         <Button Style="{StaticResource BotonRedondoBrushSelImg}" Margin="0 10 0 0" Name="seleccionar_imagen" Click="seleccionar_imagen_Click"/>
                         <TextBlock Text="Insertar Pasos" Style="{StaticResource Titular}" FontFamily="Yu Gothic UI Light" FontWeight="Bold" Margin="0 20 0 0"/>
                         <TextBlock Text="Número del paso:" FontFamily="Yu Gothic UI Light" Margin="0 10 0 0"/>
-                        <TextBox Name="txtDescripcionPaso" Margin="0 10 0 0" Style="{StaticResource textBox}" Text="{Binding PasosALista.NumPaso}"/>
+                        <TextBox Name="txtDescripcionPaso" Margin="0 10 0 0" Style="{StaticResource textBox}" Text="{Binding PasosALista.NumPaso}" IsReadOnly="True" Focusable="True" />
                         <TextBlock Text="Descripción:" FontFamily="Yu Gothic UI Light" Margin="0 10 0 0"/>
                         <TextBox Margin="0 10 0 0" Style="{StaticResource textBox}" Text="{Binding PasosALista.Descripcion}"
                             Height="30" 

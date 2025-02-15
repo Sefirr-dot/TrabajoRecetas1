@@ -31,9 +31,19 @@ namespace ProyectoConjunto.vistas
             InitializeComponent();
             recetaViewModel = new RecetaViewModel();
             recetaViewModel.NombreUser = UsuarioSingleton.Nombre;
-            this.DataContext = recetaViewModel;
-
             recetaViewModel.PasosALista.NumPaso = recetaViewModel.ListaPasos.Count() + 1;
+            this.DataContext = recetaViewModel;
+            
+
+
+        }
+
+        private void limpiarPantalla()
+        {
+            recetaViewModel.EliminarPasos();
+            ListaIngredientes.SelectedItems.Clear();
+            recetaViewModel.PasosALista.NumPaso = recetaViewModel.ListaPasos.Count() + 1;
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -55,13 +65,7 @@ namespace ProyectoConjunto.vistas
         private void btn_guardar_Click(object sender, RoutedEventArgs e)
         {
             recetaViewModel.pillarDatos();
-            txtNombre.Text = "";
-            txtDescripcion.Text = "";
-            txtDificultad.Text = "";        
-            txtDuracion.Text = "";
-            recetaViewModel.EliminarPasos();
-            ListaIngredientes.SelectedItems.Clear();
-            recetaViewModel.PasosALista.NumPaso = recetaViewModel.ListaPasos.Count() + 1;
+            limpiarPantalla();
 
         }
 
