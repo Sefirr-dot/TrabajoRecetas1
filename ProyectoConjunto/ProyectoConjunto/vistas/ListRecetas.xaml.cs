@@ -38,6 +38,8 @@ namespace ProyectoConjunto.vistas
             viewModel.NombreUser = UsuarioSingleton.Nombre;
             this.DataContext = viewModel;
 
+            
+
         }
 
         private void DataGridRecetas_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -45,7 +47,14 @@ namespace ProyectoConjunto.vistas
 
             if(DataGridRecetas.SelectedItem != null)
             {
-                viewModel.RecetaSeleccionada = (Receta) DataGridRecetas.SelectedItem;
+
+                Receta receta = (Receta) DataGridRecetas.SelectedItem;
+
+                viewModel.RecetaSeleccionada = receta;
+
+                viewModel.cargarIngredientes(receta);
+
+                viewModel.cargarPasos(receta);
             }
 
         }

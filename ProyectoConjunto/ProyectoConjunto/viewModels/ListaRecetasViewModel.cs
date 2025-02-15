@@ -1,4 +1,5 @@
 ﻿using ProyectoConjunto.models;
+using ProyectoConjunto.Models;
 using ProyectoConjunto.repositorio;
 using ProyectoConjunto.vistas;
 using System;
@@ -17,7 +18,9 @@ namespace ProyectoConjunto.viewModels
 
         private Receta recetaSeleccionada;
         public ObservableCollection<Receta> listRecetas {  get; set; }
-        
+        public ObservableCollection<Ingredientes> listIngredientesReceta { get; set; }
+        public ObservableCollection<Pasos> listPasosReceta { get; set; }
+
         private int id;
         private Repositorio repositorio;
         private string nombreUser;
@@ -26,8 +29,7 @@ namespace ProyectoConjunto.viewModels
             recetaSeleccionada = new Receta();
             
             repositorio = new Repositorio();
-            listRecetas = repositorio.CargarRecetasDesdeBaseDeDatos();
-            
+            cargarRecetas();
             
         }
 
@@ -71,6 +73,18 @@ namespace ProyectoConjunto.viewModels
         {
             listRecetas = repositorio.CargarRecetasDesdeBaseDeDatos();
             OnPropertyChanged(nameof(ListRecetas));
+        }
+
+        public void cargarIngredientes(Receta rec)
+        {
+            listIngredientesReceta = Repositorio.CargarIngredientesReceta(rec);
+            OnPropertyChanged(nameof(listIngredientesReceta));
+        }
+
+        public void cargarPasos(Receta rec)
+        {
+            listPasosReceta = Repositorio.CargarPasosReceta(rec);
+            OnPropertyChanged(nameof(listPasosReceta));
         }
 
     }
