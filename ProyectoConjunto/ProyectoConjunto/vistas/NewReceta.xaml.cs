@@ -55,6 +55,14 @@ namespace ProyectoConjunto.vistas
         private void btn_guardar_Click(object sender, RoutedEventArgs e)
         {
             recetaViewModel.pillarDatos();
+            txtNombre.Text = "";
+            txtDescripcion.Text = "";
+            txtDificultad.Text = "";        
+            txtDuracion.Text = "";
+            recetaViewModel.EliminarPasos();
+            ListaIngredientes.SelectedItems.Clear();
+            recetaViewModel.PasosALista.NumPaso = recetaViewModel.ListaPasos.Count() + 1;
+
         }
 
         private void add_paso_Click(object sender, RoutedEventArgs e)

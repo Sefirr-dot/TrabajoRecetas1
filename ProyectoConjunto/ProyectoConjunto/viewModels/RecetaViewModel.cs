@@ -193,5 +193,11 @@ namespace ProyectoConjunto.viewModels
             }
         }
 
+        public void EliminarPasos()
+        {
+            ListaPasos.Clear();
+            OnPropertyChanged(nameof(ListaPasos));
+        }
+
     }
 }
