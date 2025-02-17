@@ -33,9 +33,6 @@ namespace ProyectoConjunto.vistas
             recetaViewModel.NombreUser = UsuarioSingleton.Nombre;
             recetaViewModel.PasosALista.NumPaso = recetaViewModel.ListaPasos.Count() + 1;
             this.DataContext = recetaViewModel;
-            
-
-
         }
 
         private void limpiarPantalla()
@@ -66,6 +63,7 @@ namespace ProyectoConjunto.vistas
         {
             recetaViewModel.pillarDatos();
             recetaViewModel.nuevaReceta();
+            
             limpiarPantalla();
 
         }

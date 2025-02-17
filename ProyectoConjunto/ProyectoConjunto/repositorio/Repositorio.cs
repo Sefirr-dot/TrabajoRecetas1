@@ -508,6 +508,7 @@ namespace ProyectoConjunto.repositorio
                         }
 
                         transaction.Commit();
+                        MessageBox.Show("Receta guardada exitosamente");
                         return idReceta;
                     }
                     catch (Exception ex)
