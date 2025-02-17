@@ -95,7 +95,7 @@ namespace ProyectoConjunto.repositorio
                                 string imagen = reader["imagen"].ToString();
 
                                 // Crear el objeto Receta con la media
-                                Ingredientes ingre = new Ingredientes(id, nombre , imagen);
+                                Ingredientes ingre = new Ingredientes(id, nombre, imagen);
 
 
                                 ing.Add(ingre);
@@ -116,7 +116,7 @@ namespace ProyectoConjunto.repositorio
         {
             string connectionString = ConfigurationManager.ConnectionStrings["MysqlConnection"].ConnectionString;
 
-            ObservableCollection<Pasos> pas= new ObservableCollection<Pasos>();
+            ObservableCollection<Pasos> pas = new ObservableCollection<Pasos>();
 
             try
             {
@@ -518,6 +518,35 @@ namespace ProyectoConjunto.repositorio
                 }
             }
 
+        }
+        public static void EliminarReceta(Receta r1)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["MysqlConnection"].ConnectionString;
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "DELETE FROM recetas WHERE id = @id";
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", r1.Id);
+                        int result = cmd.ExecuteNonQuery();
+                        if (result > 0)
+                        {
+                            MessageBox.Show("Receta eliminada", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Receta no eliminada", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar la receta: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

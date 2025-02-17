@@ -83,7 +83,39 @@ namespace ProyectoConjunto.vistas
 
         }
 
-       
+        private void delete(object sender, RoutedEventArgs e)
+        {
+            
+            if (viewModel.RecetaSeleccionada != null)
+            {
+
+                Receta receta = (Receta)DataGridRecetas.SelectedItem;
+
+                if (receta != null)
+                {
+
+                    MessageBoxResult result = MessageBox.Show(
+                        "¿Estás seguro de que deseas eliminar esta receta?",
+                        "Confirmación",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Warning
+                    );
+
+                    // Si el usuario presiona "Sí", procedemos con la eliminación
+                    if (result == MessageBoxResult.Yes)
+                    {
+
+                        Repositorio.EliminarReceta(receta);                       
+                        viewModel.listRecetas.Remove(receta);
+                        MessageBox.Show("Elemento eliminado con éxito.", "Eliminado", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Debes de seleccionar primero la receta que quieres borrar");
+                }
+            }
+        }
     }
 }
 
