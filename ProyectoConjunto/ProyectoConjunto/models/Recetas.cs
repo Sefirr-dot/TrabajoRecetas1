@@ -16,6 +16,7 @@ namespace ProyectoConjunto.models
         private int idUsuario;
         private string imagen;
         private double mediaValoraciones;
+
         public BitmapImage Imagen64 { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -36,7 +37,7 @@ namespace ProyectoConjunto.models
             this.idUsuario = 0;
             this.imagen = "/images/noimage.jpg";
             this.mediaValoraciones = 0.0;
-            this.Imagen64 = null;
+            this.Imagen64 = (BitmapImage?)ConvertBase64ToImage(imagen);
         }
         private ImageSource ConvertBase64ToImage(string imagen)
         {
