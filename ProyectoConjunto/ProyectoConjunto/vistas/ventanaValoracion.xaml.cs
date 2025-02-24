@@ -59,6 +59,7 @@ namespace ProyectoConjunto
         private void btn_guardar_Click(object sender, RoutedEventArgs e)
         {
             viewModel.guardarValoracion();
+            this.Close();
         }
     }
 

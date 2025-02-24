@@ -102,6 +102,16 @@ namespace ProyectoConjunto.viewModels
             if((posicionPaso + 1) == pasosReceta.Count)
             {
 
+                // Cerrar la ventana actual
+                var ventanaActual = Application.Current.Windows
+                    .OfType<Window>()
+                    .FirstOrDefault(w => w.IsActive); // Busca la ventana activa
+
+                if (ventanaActual != null)
+                {
+                    ventanaActual.Close();
+                }
+
                 ventanaValoracion ven = new ventanaValoracion(recetaSeleccionada);
                 ven.Show();
                
