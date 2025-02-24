@@ -108,6 +108,9 @@ namespace ProyectoConjunto.vistas
                         Repositorio.EliminarReceta(receta);                       
                         viewModel.listRecetas.Remove(receta);
                         MessageBox.Show("Elemento eliminado con éxito.", "Eliminado", MessageBoxButton.OK, MessageBoxImage.Information);
+                        viewModel.RecetaSeleccionada = new Receta();
+                        viewModel.listIngredientesReceta.Clear();
+                        viewModel.listPasosReceta.Clear();
                     }
                 }
                 else
