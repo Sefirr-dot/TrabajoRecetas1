@@ -26,7 +26,7 @@ namespace ProyectoConjunto.viewModels
         private string nombreUser;
 
 
-        
+    
         public RecetaViewModel()
         {
             recetaAGuardar = new Receta();

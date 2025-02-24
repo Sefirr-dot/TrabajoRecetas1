@@ -30,10 +30,10 @@ namespace ProyectoConjunto.models
         public Receta()
         {
             this.id = 0;
-            this.nombre = "";
-            this.dificultad = "";
-            this.duracion = "";
-            this.descripcion = "";
+            this.nombre = "-";
+            this.dificultad = "-";
+            this.duracion = "-";
+            this.descripcion = "-";
             this.idUsuario = 0;
             this.imagen = "/images/noimage.jpg";
             this.mediaValoraciones = 0.0;
