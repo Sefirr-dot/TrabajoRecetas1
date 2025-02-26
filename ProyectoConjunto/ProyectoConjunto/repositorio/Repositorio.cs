@@ -291,24 +291,29 @@ namespace ProyectoConjunto.repositorio
                 {
                     conn.Open();
 
-                    string query = "SELECT  nombre, password FROM usuarios WHERE nombre = @nombre AND password = @password";
+                    string query = "SELECT nombre, password FROM usuarios WHERE nombre = @nombre";
 
                     using (var cmd = new MySqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@nombre", usuario.Nombre);
-                        cmd.Parameters.AddWithValue("@password", usuario.Password);
 
                         using (var reader = cmd.ExecuteReader())
                         {
-                            if (reader.Read())
+                            while (reader.Read())
                             {
-                                MessageBox.Show("Usuario autenticado", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
-                                return true;
-                            }
-                            else
-                            {
-                                MessageBox.Show("Usuario no autenticado", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
-                                return false;
+                                string password = reader.GetString("password");
+
+                                if(BCrypt.Net.BCrypt.Verify(usuario.Password, password))
+                                {
+                                    MessageBox.Show("Usuario autenticado", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    return true;
+
+                                } else
+                                {
+                                    MessageBox.Show("Usuario no autenticado", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    return false;
+                                }
+
                             }
                         }
                     }
@@ -349,7 +354,7 @@ namespace ProyectoConjunto.repositorio
                     using (var cmd = new MySqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@nombre", usuario.Nombre);
-                        cmd.Parameters.AddWithValue("@password", usuario.Password);
+                        cmd.Parameters.AddWithValue("@password", BCrypt.Net.BCrypt.HashPassword(usuario.Password));
                         int result = cmd.ExecuteNonQuery();
                         if (result > 0)
                         {
